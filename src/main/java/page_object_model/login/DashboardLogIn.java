@@ -21,6 +21,7 @@ public class DashboardLogIn {
     }
 
     public void logIn(String username, String password) {
+        openPage(driver, "https://jira-auto.codecool.metastage.net/login.jsp");
         sendMessage(this.username, username);
         sendMessage(this.password, password);
         clickOn(logInButton);
