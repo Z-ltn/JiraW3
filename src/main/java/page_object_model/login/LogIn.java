@@ -6,23 +6,34 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static keyword.Keyword.clickElement;
-import static keyword.Keyword.writeText;
+import static keyword.Keyword.*;
 
 public class LogIn {
     WebDriver driver;
     @FindBy(id="login-form-username")@CacheLookup private WebElement username;
     @FindBy(id="login-form-password")@CacheLookup private WebElement password;
     @FindBy(id="login-form-submit")@CacheLookup private WebElement logInButton;
+    @FindBy(id="up-d-username")@CacheLookup private WebElement loggedInUser;
+    @FindBy(xpath="//*[@id=\\\"login-form\\\"]/div[1]/div[1]/p")@CacheLookup private WebElement incorrectMessage;
 
     public LogIn(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        openPage(driver, "https://jira-auto.codecool.metastage.net/login.jsp");
     }
 
     public void logIn(String username, String password) {
-        writeText(this.username, username);
-        writeText(this.password, password);
-        clickElement(logInButton);
+        sendMessage(this.username, username);
+        sendMessage(this.password, password);
+        clickOn(logInButton);
+    }
+
+    public Boolean validateLogin(String expected) {
+        openPage(driver, "https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
+        return expected.equals(getText(loggedInUser));
+    }
+
+    public Boolean validateWrongPassword(String expected) {
+        return expected.equals(getText(incorrectMessage));
     }
 }

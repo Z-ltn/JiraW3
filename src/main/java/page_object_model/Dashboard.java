@@ -4,88 +4,54 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import util.Util;
 
-public class Dashboard extends PageBase{
-    @FindBy(id = "header-details-user-fullname")
-    private WebElement avatarPicture;
-    @FindBy(id = "log_out")
-    private WebElement logOutButton;
-    @FindBy(id = "create_link")
-    private WebElement createIssue;
-    @FindBy(id = "project-field")
-    private WebElement projectField;
-    @FindBy(id = "issuetype-field")
-    private WebElement issueType;
-    @FindBy(id = "summary")
-    private WebElement summaryName;
-    @FindBy(id = "create-issue-submit")
-    private WebElement createButton;
-    @FindBy(id = "qf-create-another")
-    private WebElement another;
+import static keyword.Keyword.*;
+
+public class Dashboard {
+    WebDriver driver;
+    @FindBy(id = "header-details-user-fullname") private WebElement avatarPicture;
+    @FindBy(id = "log_out")  private WebElement logOutButton;
+    @FindBy(id = "create_link") private WebElement createIssue;
+    @FindBy(id = "project-field") private WebElement projectField;
+    @FindBy(id = "issuetype-field") private WebElement issueType;
+    @FindBy(id = "summary") private WebElement summaryName;
+    @FindBy(id = "create-issue-submit") private WebElement createButton;
+    @FindBy(id = "qf-create-another") private WebElement another;
 
     public Dashboard(WebDriver driver) {
-        super("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa", driver);
-    }
-
-    public WebElement getAvatarPicture() {
-        return avatarPicture;
-    }
-
-    public WebElement getLogOutButton() {
-        return logOutButton;
-    }
-
-    public WebElement getCreateIssue() {
-        return createIssue;
-    }
-
-    public WebElement getProjectField() {
-        return projectField;
-    }
-
-    public WebElement getIssueType() {
-        return issueType;
-    }
-
-    public WebElement getSummaryName() {
-        return summaryName;
-    }
-
-    public WebElement getCreateButton() {
-        return createButton;
-    }
-
-    public WebElement getAnother() {
-        return another;
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        openPage(driver, "https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
     }
 
     public void logOut() {
-        getAvatarPicture().click();
-        getLogOutButton().click();
+        clickOn(avatarPicture);
+        clickOn(logOutButton);
     }
 
     private void singleIssue(String projectName, String issueType, String summaryName) {
-        getCreateIssue().click();
-        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(getProjectField()));
-        getProjectField().click();
-        getProjectField().sendKeys(Keys.BACK_SPACE);
-        getProjectField().sendKeys(projectName);
-        getProjectField().sendKeys(Keys.RETURN);
-        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(getIssueType()));
-        getIssueType().click();
-        getIssueType().sendKeys(issueType);
-        getIssueType().sendKeys(Keys.RETURN);
-        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(getSummaryName()));
-        getSummaryName().click();
-        getSummaryName().sendKeys(summaryName);
+        clickOn(createIssue);
+        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(projectField));
+        clickOn(projectField);
+        sendKey(projectField, Keys.BACK_SPACE);
+        sendMessage(projectField, projectName);
+        sendKey(projectField, Keys.RETURN);
+        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(this.issueType));
+        clickOn(this.issueType);
+        sendMessage(this.issueType, issueType);
+        sendKey(this.issueType, Keys.RETURN);
+        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        clickOn(this.summaryName);
+        sendMessage(this.summaryName, summaryName);
     }
 
     public void createIssue(String projectName, String issueType, String summaryName, boolean another) {
         singleIssue(projectName, issueType, summaryName);
-        if (another) getAnother().click();
-        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(getCreateButton()));
-        getCreateButton().click();
+        if (another) clickOn(this.another);
+        Util.wait(Util.getDriver(), 10).until(ExpectedConditions.visibilityOf(createButton));
+        clickOn(createButton);
     }
 }

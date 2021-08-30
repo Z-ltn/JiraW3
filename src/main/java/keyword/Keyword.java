@@ -1,5 +1,6 @@
 package keyword;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -11,16 +12,28 @@ public class Keyword {
         driver.get(url);
     }
 
+    public static void closePage(WebDriver driver) {
+        driver.close();
+    }
+
     public static String currentUrl(WebDriver driver) {
         return driver.getCurrentUrl();
     }
 
-    public static void clickElement(WebElement webElement) {
+    public static String getTitle(WebDriver driver) {
+        return driver.getTitle();
+    }
+
+    public static void clickOn(WebElement webElement) {
         webElement.click();
     }
 
-    public static void writeText(WebElement webElement, String text) {
-        webElement.sendKeys(text);
+    public static void sendMessage(WebElement webElement, String message) {
+        webElement.sendKeys(message);
+    }
+
+    public static void sendKey(WebElement webElement, Keys key) {
+        webElement.sendKeys(key);
     }
 
     public static String getText(WebElement webElement) {
