@@ -1,8 +1,6 @@
 package page_object_model;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +16,7 @@ public class Dashboard extends PageBase {
     @FindBy(id="summary") private WebElement summaryName;
     @FindBy(id="create-issue-submit") private WebElement createButton;
     @FindBy(id="qf-create-another") private WebElement another;
+    @FindBy(xpath="//*[@id=\"project-single-select\"]/img") private WebElement projectPicture;
 
     public Dashboard(WebDriver driver) {
         super(driver);
@@ -47,5 +46,27 @@ public class Dashboard extends PageBase {
         if (another) clickOn(this.another);
         Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(createButton));
         clickOn(createButton);
+    }
+
+    public void createIssueOnlyProject(String projectName) {
+        clickOn(createIssue);
+        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(projectField));
+        clickOn(projectField);
+        sendKey(projectField, Keys.BACK_SPACE);
+        sendMessage(projectField, projectName);
+        sendKey(projectField, Keys.RETURN);
+    }
+
+    public boolean validateProjectPicture() {
+        try {
+            Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(projectPicture));
+        }
+        catch (StaleElementReferenceException ignored) {
+            validateProjectPicture();
+        }
+        catch (TimeoutException ignored) {
+            return false;
+        }
+        return true;
     }
 }

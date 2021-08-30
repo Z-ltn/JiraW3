@@ -1,0 +1,13 @@
+user,projectName,hasAccess
+USER1,TOUCAN project (TOUCAN),true
+USER1,COALA project (COALA,true
+USER1,JETI project (JETI),false
+USER2,TOUCAN project (TOUCAN),true
+USER2,COALA project (COALA,false
+USER2,JETI project (JETI),true
+USER3,TOUCAN project (TOUCAN),false
+USER3,COALA project (COALA,true
+USER3,JETI project (JETI),true
+USER4,TOUCAN project (TOUCAN),true
+USER4,COALA project (COALA,true
+USER4,JETI project (JETI),false
