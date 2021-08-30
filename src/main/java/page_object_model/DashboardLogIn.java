@@ -5,13 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-public class LogIn extends PageBase{
-    @FindBy(id="login-form-username")@CacheLookup private WebElement username;
+public class DashboardLogIn extends PageBase{
+    @FindBy(id="login-form-username")@CacheLookup
+    private WebElement username;
     @FindBy(id="login-form-password")@CacheLookup private WebElement password;
-    @FindBy(id="login-form-submit")@CacheLookup private WebElement logInButton;
+    @FindBy(id="login")@CacheLookup private WebElement logInButton;
 
-    public LogIn(WebDriver driver) {
-        super("https://jira-auto.codecool.metastage.net/login.jsp", driver);
+    public DashboardLogIn(WebDriver driver) {
+        super("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa", driver);
     }
 
     public WebElement getUsername() {
