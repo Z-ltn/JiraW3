@@ -12,9 +12,9 @@ public class LogIn {
     WebDriver driver;
     @FindBy(id="login-form-username")@CacheLookup private WebElement username;
     @FindBy(id="login-form-password")@CacheLookup private WebElement password;
-    @FindBy(id="login-form-submit")@CacheLookup private WebElement logInButton;
+    @FindBy(xpath = "//input[@value='Log In']")@CacheLookup private WebElement logInButton;
     @FindBy(id="up-d-username")@CacheLookup private WebElement loggedInUser;
-    @FindBy(xpath="//*[@id=\\\"login-form\\\"]/div[1]/div[1]/p")@CacheLookup private WebElement incorrectMessage;
+    @FindBy(className="aui-message-error")@CacheLookup private WebElement incorrectMessage;
 
     public LogIn(WebDriver driver) {
         this.driver = driver;

@@ -2,11 +2,11 @@ package com.codecool.jira.login;
 
 
 import com.codecool.jira.MainTest;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.By;
 import page_object_model.login.DashboardLogIn;
 import page_object_model.login.LogIn;
@@ -22,7 +22,7 @@ public class LoginTest extends MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"USER7", "USER8", "USER9", "USER10"})
+    @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_fromDashboard(String user) {
         String expected = dotenv.get(user);
 
@@ -43,7 +43,7 @@ public class LoginTest extends MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"USER7", "USER8", "USER9", "USER10"})
+    @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_wrongPassword(String user) {
         String expected = "Sorry, your username and password are incorrect - please try again.";
 
@@ -54,13 +54,13 @@ public class LoginTest extends MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"USER7", "USER8", "USER9", "USER10"})
+    @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_successfulFromLoginPage(String user) {
         String expected = dotenv.get(user);
 
         DashboardLogIn dashboardLogin = new DashboardLogIn(driver);
         LogIn login = new LogIn(driver);
-        dashboardLogin.logIn(user,dotenv.get("PASSWORD"));
+        dashboardLogin.logIn(dotenv.get(user),dotenv.get("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
     }
@@ -79,7 +79,7 @@ public class LoginTest extends MainTest {
         assertEquals(expected, driver.findElement(By.xpath("//*[@id=\"com.codecool.jira.login-form\"]/div[1]/div[1]/p")).getText());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         driver.close();
     }

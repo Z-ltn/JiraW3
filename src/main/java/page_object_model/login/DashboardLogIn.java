@@ -12,7 +12,7 @@ public class DashboardLogIn {
     WebDriver driver;
     @FindBy(id="login-form-username")@CacheLookup private WebElement username;
     @FindBy(id="login-form-password")@CacheLookup private WebElement password;
-    @FindBy(id="login")@CacheLookup private WebElement logInButton;
+    @FindBy(xpath = "//input[@value='Log In']") @CacheLookup private WebElement logInButton;
 
     public DashboardLogIn(WebDriver driver) {
         this.driver = driver;
