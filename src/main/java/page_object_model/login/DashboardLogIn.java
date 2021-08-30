@@ -1,9 +1,10 @@
-package page_object_model;
+package page_object_model.login;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import page_object_model.PageBase;
 
 public class DashboardLogIn extends PageBase{
     @FindBy(id="login-form-username")@CacheLookup
