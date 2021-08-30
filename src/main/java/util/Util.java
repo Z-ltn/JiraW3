@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Util {
-    public static ChromeDriver getDriver() {
+    public static WebDriver getDriver() {
         return new ChromeDriver();
     }
 

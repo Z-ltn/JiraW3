@@ -6,7 +6,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static keyword.Keyword.*
+import static keyword.Keyword.*;
 
 public class LogIn {
     WebDriver driver;
