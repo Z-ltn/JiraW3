@@ -10,11 +10,11 @@ import static keyword.Keyword.*;
 
 public abstract class PageBase {
     WebDriver driver;
-    @FindBy(id="login-form-username")@CacheLookup private WebElement username;
-    @FindBy(id="login-form-password")@CacheLookup private WebElement password;
-    @FindBy(xpath="//input[@value='Log In']")@CacheLookup private WebElement logInButton;
-    @FindBy(id="header-details-user-fullname") private WebElement avatarPicture;
-    @FindBy(id="log_out") private WebElement logOutButton;
+    @FindBy(id="login-form-username")@CacheLookup protected WebElement username;
+    @FindBy(id="login-form-password")@CacheLookup protected WebElement password;
+    @FindBy(xpath="//input[@value='Log In']")@CacheLookup protected WebElement logInButton;
+    @FindBy(id="header-details-user-fullname") protected WebElement avatarPicture;
+    @FindBy(id="log_out") protected WebElement logOutButton;
 
     public PageBase(WebDriver driver) {
         this.driver = driver;
@@ -34,5 +34,4 @@ public abstract class PageBase {
         clickOn(avatarPicture);
         clickOn(logOutButton);
     }
-
 }

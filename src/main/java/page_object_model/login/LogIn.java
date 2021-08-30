@@ -13,12 +13,8 @@ import static keyword.Keyword.*;
 
 public class LogIn extends PageBase {
     WebDriver driver;
-    @FindBy(id="login-form-username")@CacheLookup private WebElement username;
-    @FindBy(id="login-form-password")@CacheLookup private WebElement password;
-    @FindBy(xpath="//input[@value='Log In']")@CacheLookup private WebElement logInButton;
     @FindBy(id="up-d-username")@CacheLookup private WebElement loggedInUser;
     @FindBy(className="aui-message-error")@CacheLookup private WebElement incorrectMessage;
-    @FindBy(id="header-details-user-fullname")@CacheLookup private WebElement avatar;
 
     public LogIn(WebDriver driver) {
         super(driver);
@@ -27,7 +23,7 @@ public class LogIn extends PageBase {
     }
 
     public Boolean validateLogin(String expected) {
-        Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(avatar));
+        Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(avatarPicture));
         openPage(driver, "https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
         return expected.equals(getText(loggedInUser));
     }
@@ -42,5 +38,16 @@ public class LogIn extends PageBase {
 
     public void loginUsingEmptyCredentials() {
         clickOn(logInButton);
+    }
+
+    public void captcha(String user) {
+        sendMessage(username, user);
+        for (int i=0; i<4; i++) {
+            clickOn(logInButton);
+        }
+    }
+    
+    public boolean validateCaptcha(String expected) {
+        return expected.equals(getText(incorrectMessage));
     }
 }
