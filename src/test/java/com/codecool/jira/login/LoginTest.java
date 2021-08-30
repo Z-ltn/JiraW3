@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import page_object_model.login.DashboardLogIn;
 import page_object_model.login.LogIn;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,8 +28,6 @@ public class LoginTest extends MainTest {
 
         LogIn login = new LogIn(driver);
         login.logIn(dotenv.get(user),dotenv.get("PASSWORD"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
-        driver.get("https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
 
         assertTrue(login.validateLogin(expected));
     }
@@ -55,14 +53,16 @@ public class LoginTest extends MainTest {
         assertTrue(login.validateWrongPassword(expected));
     }
 
-    @Test
-    public void login_successfulFromLoginPage() {
-        String expected = dotenv.get("JIRA_USERNAME");
+    @ParameterizedTest
+    @ValueSource(strings = {"user7", "user8", "user9", "user10"})
+    public void login_successfulFromLoginPage(String user) {
+        String expected = dotenv.get(user);
 
-        login();
-        driver.navigate().to("https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
+        DashboardLogIn dashboardLogin = new DashboardLogIn(driver);
+        LogIn login = new LogIn(driver);
+        dashboardLogin.logIn(user,dotenv.get("PASSWORD"));
 
-        assertEquals(expected, driver.findElement(By.id("up-d-username")).getText());
+        assertTrue(login.validateLogin(expected));
     }
 
     //    @Test
