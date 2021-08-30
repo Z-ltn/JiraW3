@@ -8,7 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.By;
-import page_object_model.login.DashboardLogIn;
 import page_object_model.login.LogIn;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +26,8 @@ public class LoginTest extends MainTest {
         String expected = dotenv.get(user);
 
         LogIn login = new LogIn(driver);
-        login.logIn(dotenv.get(user),dotenv.get("PASSWORD"));
+        login.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+        login.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
     }
@@ -36,10 +36,11 @@ public class LoginTest extends MainTest {
     public void login_emptyCredentials() {
         String expected = "Sorry, your username and password are incorrect - please try again.";
 
-        driver.get("https://jira-auto.codecool.metastage.net/login.jsp");
-        driver.findElement(By.xpath("//*[@id=\"com.codecool.jira.login-form-submit\"]")).click();
+        LogIn login = new LogIn(driver);
+        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        login.loginUsingEmptyCredentials();
 
-        assertEquals(expected, driver.findElement(By.xpath("//*[@id=\"com.codecool.jira.login-form\"]/div[1]/div[1]/p")).getText());
+        assertTrue(login.validateErrorMessage(expected));
     }
 
     @ParameterizedTest
@@ -48,7 +49,8 @@ public class LoginTest extends MainTest {
         String expected = "Sorry, your username and password are incorrect - please try again.";
 
         LogIn login = new LogIn(driver);
-        login.logIn(dotenv.get(user),dotenv.get("cica"));
+        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        login.login(dotenv.get(user),"cica");
 
         assertTrue(login.validateWrongPassword(expected));
     }
@@ -58,9 +60,9 @@ public class LoginTest extends MainTest {
     public void login_successfulFromLoginPage(String user) {
         String expected = dotenv.get(user);
 
-        DashboardLogIn dashboardLogin = new DashboardLogIn(driver);
         LogIn login = new LogIn(driver);
-        dashboardLogin.logIn(dotenv.get(user),dotenv.get("PASSWORD"));
+        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        login.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
     }
