@@ -22,7 +22,7 @@ public class LoginTest extends MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"user7", "user8", "user9", "user10"})
+    @ValueSource(strings = {"USER7", "USER8", "USER9", "USER10"})
     public void login_fromDashboard(String user) {
         String expected = dotenv.get(user);
 
@@ -43,7 +43,7 @@ public class LoginTest extends MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"user7", "user8", "user9", "user10"})
+    @ValueSource(strings = {"USER7", "USER8", "USER9", "USER10"})
     public void login_wrongPassword(String user) {
         String expected = "Sorry, your username and password are incorrect - please try again.";
 
@@ -54,7 +54,7 @@ public class LoginTest extends MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"user7", "user8", "user9", "user10"})
+    @ValueSource(strings = {"USER7", "USER8", "USER9", "USER10"})
     public void login_successfulFromLoginPage(String user) {
         String expected = dotenv.get(user);
 
