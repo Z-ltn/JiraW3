@@ -51,4 +51,6 @@ public class Keyword {
     public static void select(Select select, String value) {
         select.selectByValue(value);
     }
+
+    public static String getCurrentUrl(WebDriver driver) {return driver.getCurrentUrl();}
 }

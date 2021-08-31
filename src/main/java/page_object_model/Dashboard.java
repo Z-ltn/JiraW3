@@ -1,8 +1,6 @@
 package page_object_model;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,6 +15,15 @@ public class Dashboard extends PageBase {
     @FindBy(id="summary") private WebElement summaryName;
     @FindBy(id="create-issue-submit") private WebElement createButton;
     @FindBy(id="qf-create-another") private WebElement another;
+    @FindBy(xpath="//*[@id=\"project-single-select\"]/img") private WebElement projectPicture;
+    @FindBy(xpath="//*[@id=\"aui-flag-container\"]/div/div/a") private WebElement issueLink;
+    @FindBy(id="summary-val") private WebElement issuePageSummaryName;
+    @FindBy(id="opsbar-operations_more") private WebElement moreButton;
+    @FindBy(xpath = "//*[@id=\"delete-issue\"]/a") private WebElement deleteButton;
+    @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
+    @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
+    @FindBy(id="create-subtask") private WebElement createSubtaskButton;
+    @FindBy(linkText="testSubTask") private WebElement testSubTask;
 
     public Dashboard(WebDriver driver) {
         super(driver);
@@ -32,12 +39,22 @@ public class Dashboard extends PageBase {
         sendKey(projectField, Keys.BACK_SPACE);
         sendMessage(projectField, projectName);
         sendKey(projectField, Keys.RETURN);
-        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.issueType));
+        try {
+            Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.issueType));
+        }
+        catch (StaleElementReferenceException ignored) {
+            Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.issueType));
+        }
         clickOn(this.issueType);
         sendMessage(this.issueType, issueType);
         sendKey(this.issueType, Keys.RETURN);
         Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
-        clickOn(this.summaryName);
+        try {
+            clickOn(this.summaryName);
+        }
+        catch (StaleElementReferenceException ignored) {
+            clickOn(this.summaryName);
+        }
         sendMessage(this.summaryName, summaryName);
     }
 
@@ -47,4 +64,60 @@ public class Dashboard extends PageBase {
         Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(createButton));
         clickOn(createButton);
     }
+
+    public void createSubTask() {
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+        clickOn(issueLink);
+        clickOn(moreButton);
+        clickOn(createSubtaskButton);
+        sendMessage(summaryName, "testSubTask");
+        clickOn(createButton);
+    }
+
+    public void deleteIssue() {
+        clickOn(moreButton);
+        clickOn(deleteButton);
+        clickOn(deleteIssueSubmitButton);
+    }
+
+    public void createIssueOnlyProject(String projectName) {
+        clickOn(createIssue);
+        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(projectField));
+        clickOn(projectField);
+        sendKey(projectField, Keys.BACK_SPACE);
+        sendMessage(projectField, projectName);
+        sendKey(projectField, Keys.RETURN);
+    }
+
+    public boolean validateSubTask() {
+        return testSubTask.isDisplayed();
+    }
+
+    public boolean validateIssue(String expectedSummaryName) {
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+        clickOn(issueLink);
+        return expectedSummaryName.equals(getText(issuePageSummaryName));
+    }
+
+    public boolean validateProjectPicture() {
+        try {
+            Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(projectPicture));
+        }
+        catch (StaleElementReferenceException ignored) {
+            validateProjectPicture();
+        }
+        catch (TimeoutException ignored) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateDeleteIssue(String expectedSummaryName) {
+        validateIssue(expectedSummaryName);
+        String currentUrl = getCurrentUrl(driver);
+        deleteIssue();
+        openURL(currentUrl);
+        return "You can't view this issue".equals(getText(deletedIssueMessage));
+    }
+
 }
