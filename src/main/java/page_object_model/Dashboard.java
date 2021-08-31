@@ -22,6 +22,7 @@ public class Dashboard extends PageBase {
     @FindBy(id="opsbar-operations_more") private WebElement moreButton;
     @FindBy(xpath = "//*[@id=\"delete-issue\"]/a") private WebElement deleteButton;
     @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
+    @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
 
     public Dashboard(WebDriver driver) {
         super(driver);
@@ -37,7 +38,12 @@ public class Dashboard extends PageBase {
         sendKey(projectField, Keys.BACK_SPACE);
         sendMessage(projectField, projectName);
         sendKey(projectField, Keys.RETURN);
-        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.issueType));
+        try {
+            Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.issueType));
+        }
+        catch (StaleElementReferenceException ignored) {
+            Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.issueType));
+        }
         clickOn(this.issueType);
         sendMessage(this.issueType, issueType);
         sendKey(this.issueType, Keys.RETURN);
@@ -86,4 +92,13 @@ public class Dashboard extends PageBase {
         }
         return true;
     }
+
+    public boolean validateDeleteIssue(String expectedSummaryName) {
+        validateIssue(expectedSummaryName);
+        String currentUrl = getCurrentUrl(driver);
+        deleteIssue();
+        openURL(currentUrl);
+        return "You can't view this issue".equals(getText(deletedIssueMessage));
+    }
+
 }

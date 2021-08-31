@@ -43,6 +43,18 @@ public class CreateIssueTest extends MainTest {
         dashboard.deleteIssue();
     }
 
+    @ParameterizedTest
+    @CsvSource({"Main Testing Project,Task,TaskTest"})
+    public void deleteIssue(String projectName, String issueType, String summaryName) {
+        dashboard = new Dashboard(driver);
+
+        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+        dashboard.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
+
+        dashboard.createIssue(projectName, issueType, summaryName, false);
+        assertTrue(dashboard.validateDeleteIssue(summaryName));
+    }
+
     @AfterEach
     public void tearDown() {
         super.tearDown();
