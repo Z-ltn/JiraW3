@@ -32,9 +32,4 @@ public class VersionTest extends MainTest {
         glassVersion.deleteVersion("test", false);
     }
 
-    public void glass_releaseVersion() {
-        glassVersion = new GlassVersion(driver);
-
-    }
-
 }
