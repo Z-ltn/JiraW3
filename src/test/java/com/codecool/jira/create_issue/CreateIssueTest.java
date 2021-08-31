@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import page_object_model.Dashboard;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateIssueTest extends MainTest {
@@ -27,7 +28,7 @@ public class CreateIssueTest extends MainTest {
         dashboard.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         dashboard.createIssueOnlyProject(projectName);
-        assertTrue(dashboard.validateProjectPicture());
+        assertTrue(dashboard.getProjectPictureIsPresent());
     }
 
     @ParameterizedTest
@@ -39,20 +40,20 @@ public class CreateIssueTest extends MainTest {
         dashboard.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
-        assertTrue(dashboard.validateIssue(summaryName));
+        assertEquals(summaryName, dashboard.getIssuePageSummaryName());
         dashboard.deleteIssue();
     }
 
     @ParameterizedTest
-    @CsvSource({"Main Testing Project,Task,TaskTest"})
-    public void deleteIssue(String projectName, String issueType, String summaryName) {
+    @CsvSource({"Main Testing Project,Task,TaskTest,You can't view this issue"})
+    public void deleteIssue(String projectName, String issueType, String summaryName, String expectedMessage) {
         dashboard = new Dashboard(driver);
 
         dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         dashboard.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
-        assertTrue(dashboard.validateDeleteIssue(summaryName));
+        assertEquals(expectedMessage, dashboard.getDeletedIssueMessage());
     }
 
     @ParameterizedTest
@@ -65,7 +66,7 @@ public class CreateIssueTest extends MainTest {
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
         dashboard.createSubTask();
-        assertTrue(dashboard.validateSubTask());
+        assertTrue(dashboard.getTestSubtaskIsDisplayed());
         dashboard.deleteIssue();
     }
 
