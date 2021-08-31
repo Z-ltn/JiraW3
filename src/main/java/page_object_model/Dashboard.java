@@ -49,13 +49,13 @@ public class Dashboard extends PageBase {
         clickOn(this.issueType);
         sendMessage(this.issueType, issueType);
         sendKey(this.issueType, Keys.RETURN);
+        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
         try {
-            Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+            clickOn(this.summaryName);
         }
         catch (StaleElementReferenceException ignored) {
-            Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+            clickOn(this.summaryName);
         }
-        clickOn(this.summaryName);
         sendMessage(this.summaryName, summaryName);
     }
 
