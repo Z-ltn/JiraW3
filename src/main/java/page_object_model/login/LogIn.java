@@ -12,7 +12,6 @@ import util.Util;
 import static keyword.Keyword.*;
 
 public class LogIn extends PageBase {
-    WebDriver driver;
     @FindBy(id="up-d-username")@CacheLookup private WebElement loggedInUser;
     @FindBy(className="aui-message-error")@CacheLookup private WebElement incorrectMessage;
 

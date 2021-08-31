@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import static keyword.Keyword.*;
 
 public abstract class PageBase {
-    WebDriver driver;
+    protected WebDriver driver;
     @FindBy(id="login-form-username")@CacheLookup protected WebElement username;
     @FindBy(id="login-form-password")@CacheLookup protected WebElement password;
     @FindBy(xpath="//input[@value='Log In']")@CacheLookup protected WebElement logInButton;

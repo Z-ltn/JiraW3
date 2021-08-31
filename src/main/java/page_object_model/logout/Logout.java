@@ -9,9 +9,7 @@ import page_object_model.PageBase;
 import static keyword.Keyword.getText;
 
 public class Logout extends PageBase{
-    WebDriver driver;
-
-    @FindBy(xpath="//*[@id=\"login-form\"]/div[1]/div[1]/p[2]") protected WebElement warningMessage;
+   @FindBy(xpath="//*[@id=\"login-form\"]/div[1]/div[1]/p[2]") protected WebElement warningMessage;
 
     public Logout(WebDriver driver) {
         super(driver);

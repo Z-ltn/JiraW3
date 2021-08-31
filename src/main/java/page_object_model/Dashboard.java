@@ -11,7 +11,6 @@ import util.Util;
 import static keyword.Keyword.*;
 
 public class Dashboard extends PageBase {
-    WebDriver driver;
     @FindBy(id="create_link") private WebElement createIssue;
     @FindBy(id="project-field") private WebElement projectField;
     @FindBy(id="issuetype-field") private WebElement issueType;
