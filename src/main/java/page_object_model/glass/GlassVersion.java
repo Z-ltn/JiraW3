@@ -91,4 +91,9 @@ public class GlassVersion extends PageBase {
         sendMessage(editNameField, newName);
         clickOn(editSaveButton);
     }
+
+    public void archiveVersion(String versionName) {
+        clickMenuButtonOnVersion(versionName);
+        clickOn(archiveButton);
+    }
 }
