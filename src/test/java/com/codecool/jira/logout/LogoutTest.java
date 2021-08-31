@@ -5,13 +5,11 @@ import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import page_object_model.login.LogIn;
 import page_object_model.logout.Logout;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LogoutTest extends MainTest {
-    LogIn login;
     Logout logout;
 
     @Before
@@ -24,10 +22,9 @@ public class LogoutTest extends MainTest {
     public void logoutTest(String user) {
         String expected = "If you think you shouldn't get this message, please contact your Jira administrators.";
 
-        login = new LogIn(driver);
         logout = new Logout(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
-        login.login(dotenv.get(user), dotenv.get("PASSWORD"));
+        logout.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+        logout.login(dotenv.get(user), dotenv.get("PASSWORD"));
         logout.logout();
 
         assertTrue(logout.validateLogout(expected));
