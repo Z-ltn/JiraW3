@@ -17,6 +17,11 @@ public class Dashboard extends PageBase {
     @FindBy(id="create-issue-submit") private WebElement createButton;
     @FindBy(id="qf-create-another") private WebElement another;
     @FindBy(xpath="//*[@id=\"project-single-select\"]/img") private WebElement projectPicture;
+    @FindBy(xpath="//*[@id=\"aui-flag-container\"]/div/div/a") private WebElement issueLink;
+    @FindBy(id="summary-val") private WebElement issuePageSummaryName;
+    @FindBy(id="opsbar-operations_more") private WebElement moreButton;
+    @FindBy(xpath = "//*[@id=\"delete-issue\"]/a") private WebElement deleteButton;
+    @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
 
     public Dashboard(WebDriver driver) {
         super(driver);
@@ -48,6 +53,12 @@ public class Dashboard extends PageBase {
         clickOn(createButton);
     }
 
+    public void deleteIssue() {
+        clickOn(moreButton);
+        clickOn(deleteButton);
+        clickOn(deleteIssueSubmitButton);
+    }
+
     public void createIssueOnlyProject(String projectName) {
         clickOn(createIssue);
         Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(projectField));
@@ -55,6 +66,12 @@ public class Dashboard extends PageBase {
         sendKey(projectField, Keys.BACK_SPACE);
         sendMessage(projectField, projectName);
         sendKey(projectField, Keys.RETURN);
+    }
+
+    public boolean validateIssue(String expectedSummaryName) {
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+        clickOn(issueLink);
+        return expectedSummaryName.equals(getText(issuePageSummaryName));
     }
 
     public boolean validateProjectPicture() {
