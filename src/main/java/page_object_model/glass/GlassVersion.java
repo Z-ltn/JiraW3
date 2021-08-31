@@ -84,4 +84,11 @@ public class GlassVersion extends PageBase {
         clickOn(releaseButton);
         clickOn(releaseSubmitButton);
     }
+
+    public void editVersion(String versionName, String newName) {
+        clickMenuButtonOnVersion(versionName);
+        clickOn(editButton);
+        sendMessage(editNameField, newName);
+        clickOn(editSaveButton);
+    }
 }
