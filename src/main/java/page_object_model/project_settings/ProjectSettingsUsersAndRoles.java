@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProjectSettingsUsersAndRoles extends ProjectSettingsSummary{
     @FindBy(xpath = "//span[@class='sc-dNLxif egkfiB'][text()='Project lead']/following-sibling::a")
-    WebElement projectLead;
+    private WebElement projectLead;
     @FindBy(xpath = "//span[@class='sc-dNLxif egkfiB'][text()='Default Assignee']/following-sibling::span")
-    WebElement defaultAssignee;
+    private WebElement defaultAssignee;
 
     public ProjectSettingsUsersAndRoles(WebDriver driver) {
         super(driver);
