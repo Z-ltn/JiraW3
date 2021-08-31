@@ -1,9 +1,14 @@
 package page_object_model.glass;
 
+import keyword.Keyword;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import page_object_model.PageBase;
+
+import java.util.List;
+
+import static keyword.Keyword.*;
 
 public class GlassDocumentation extends PageBase {
     @FindBy(id = "aui-uid-1")
@@ -18,8 +23,21 @@ public class GlassDocumentation extends PageBase {
     private WebElement projectLead;
     @FindBy(xpath = "//td[@class='glass-meta-label'][text()='Issue Types']/following-sibling::td")
     private WebElement issueTypesContainer;
+    @FindBy(className = "versions-table__name")
+    private List<WebElement> versionsTable;
 
     public GlassDocumentation(WebDriver driver) {
         super(driver);
+    }
+
+    public boolean doesTheVersionExists() {
+        clickOn(versions);
+        boolean isFound = false;
+        for (WebElement version : versionsTable) {
+            if (version.getText().equals("test")) {
+                isFound = true;
+            }
+        }
+        return isFound;
     }
 }
