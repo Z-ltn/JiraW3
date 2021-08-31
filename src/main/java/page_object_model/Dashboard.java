@@ -23,6 +23,8 @@ public class Dashboard extends PageBase {
     @FindBy(xpath = "//*[@id=\"delete-issue\"]/a") private WebElement deleteButton;
     @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
     @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
+    @FindBy(id="create-subtask") private WebElement createSubtaskButton;
+    @FindBy(linkText="testSubTask") private WebElement testSubTask;
 
     public Dashboard(WebDriver driver) {
         super(driver);
@@ -47,7 +49,12 @@ public class Dashboard extends PageBase {
         clickOn(this.issueType);
         sendMessage(this.issueType, issueType);
         sendKey(this.issueType, Keys.RETURN);
-        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        try {
+            Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        }
+        catch (StaleElementReferenceException ignored) {
+            Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        }
         clickOn(this.summaryName);
         sendMessage(this.summaryName, summaryName);
     }
@@ -56,6 +63,15 @@ public class Dashboard extends PageBase {
         singleIssue(projectName, issueType, summaryName);
         if (another) clickOn(this.another);
         Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(createButton));
+        clickOn(createButton);
+    }
+
+    public void createSubTask() {
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+        clickOn(issueLink);
+        clickOn(moreButton);
+        clickOn(createSubtaskButton);
+        sendMessage(summaryName, "testSubTask");
         clickOn(createButton);
     }
 
@@ -72,6 +88,10 @@ public class Dashboard extends PageBase {
         sendKey(projectField, Keys.BACK_SPACE);
         sendMessage(projectField, projectName);
         sendKey(projectField, Keys.RETURN);
+    }
+
+    public boolean validateSubTask() {
+        return testSubTask.isDisplayed();
     }
 
     public boolean validateIssue(String expectedSummaryName) {
