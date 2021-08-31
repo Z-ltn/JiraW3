@@ -48,7 +48,12 @@ public class Dashboard extends PageBase {
         clickOn(this.issueType);
         sendMessage(this.issueType, issueType);
         sendKey(this.issueType, Keys.RETURN);
-        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        try {
+            Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        }
+        catch (StaleElementReferenceException ignored) {
+            Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(this.summaryName));
+        }
         try {
             clickOn(this.summaryName);
         }
@@ -89,22 +94,22 @@ public class Dashboard extends PageBase {
         sendKey(projectField, Keys.RETURN);
     }
 
-    public boolean validateSubTask() {
+    public boolean getTestSubtaskIsDisplayed() {
         return testSubTask.isDisplayed();
     }
 
-    public boolean validateIssue(String expectedSummaryName) {
+    public String getIssuePageSummaryName() {
         Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
         clickOn(issueLink);
-        return expectedSummaryName.equals(getText(issuePageSummaryName));
+        return getText(issuePageSummaryName);
     }
 
-    public boolean validateProjectPicture() {
+    public boolean getProjectPictureIsPresent() {
         try {
             Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(projectPicture));
         }
         catch (StaleElementReferenceException ignored) {
-            validateProjectPicture();
+            getProjectPictureIsPresent();
         }
         catch (TimeoutException ignored) {
             return false;
@@ -112,12 +117,12 @@ public class Dashboard extends PageBase {
         return true;
     }
 
-    public boolean validateDeleteIssue(String expectedSummaryName) {
-        validateIssue(expectedSummaryName);
+    public String getDeletedIssueMessage() {
+        getIssuePageSummaryName();
         String currentUrl = getCurrentUrl(driver);
         deleteIssue();
         openURL(currentUrl);
-        return "You can't view this issue".equals(getText(deletedIssueMessage));
+        return getText(deletedIssueMessage);
     }
 
 }
