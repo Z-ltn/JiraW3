@@ -22,22 +22,31 @@ public class GlassVersion extends PageBase {
     @FindBy(xpath = "//a[@data-version-type='archived']") private WebElement archivedButton;
     @FindBy(css = ".item-state-ready") private List<WebElement> rows;
     @FindBy(css = ".details-button") private WebElement detailsButton;
+    @FindBy(css = ".project-config-operations-archive") private WebElement archiveButton;
     @FindBy(css = ".project-config-operations-unarchive") private WebElement unarchiveButton;
     @FindBy(css = ".project-config-operations-delete") private WebElement deleteButton;
+    @FindBy(css = ".project-config-operations-release") private WebElement releaseButton;
     @FindBy(id = "submit") private WebElement submitButton;
-
-
+    @FindBy(id = "project-config-version-release-form-submit") private WebElement releaseSubmitButton;
+    @FindBy(css = ".version-edit-dialog") private WebElement editButton;
+    @FindBy(id = "version-name") private WebElement editNameField;
+    @FindBy(id = "version-save-submit") private WebElement editSaveButton;
 
     public GlassVersion(WebDriver driver) {
         super(driver);
     }
 
-    public void addNewVersion() {
+    public void addNewVersionWithWrongReleaseDate() {
         sendMessage(versionName, "test");
         sendMessage(startDate, "6/aug/21");
         sendMessage(releaseDate, "1/aug/21");
         sendMessage(description, "test_description");
         sendKey(releaseDate, Keys.RETURN);
+    }
+
+    public void addNewVersion(String versionName) {
+        sendMessage(this.versionName, versionName);
+        clickOn(addButton);
     }
 
     public String getErrorMessage() {
@@ -68,5 +77,11 @@ public class GlassVersion extends PageBase {
                 break;
             }
         }
+    }
+
+    public void releaseVersion(String versionName) {
+        clickMenuButtonOnVersion(versionName);
+        clickOn(releaseButton);
+        clickOn(releaseSubmitButton);
     }
 }

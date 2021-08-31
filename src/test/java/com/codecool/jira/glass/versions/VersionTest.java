@@ -18,7 +18,7 @@ public class VersionTest extends MainTest {
         glassVersion = new GlassVersion(driver);
         glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.addNewVersion();
+        glassVersion.addNewVersionWithWrongReleaseDate();
 
         assertEquals("The start date cannot be after the release date.", glassVersion.getErrorMessage());
 
@@ -26,10 +26,26 @@ public class VersionTest extends MainTest {
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExists());
+        assertTrue(glassDocumentation.doesTheVersionExists("test"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion("test", false);
     }
 
+    @Test
+    public void glass_releaseVersion() {
+        glassVersion = new GlassVersion(driver);
+        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
+        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.addNewVersion("test");
+        glassVersion.releaseVersion("test");
+
+        glassDocumentation = new GlassDocumentation(driver);
+        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "RELEASED"));
+
+        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.deleteVersion("test", false);
+    }
 }

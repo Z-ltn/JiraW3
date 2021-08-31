@@ -1,6 +1,7 @@
 package page_object_model.glass;
 
 import keyword.Keyword;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,12 +31,25 @@ public class GlassDocumentation extends PageBase {
         super(driver);
     }
 
-    public boolean doesTheVersionExists() {
+    public boolean doesTheVersionExists(String versionName) {
         clickOn(versions);
         boolean isFound = false;
         for (WebElement version : versionsTable) {
-            if (version.getText().equals("test")) {
+            if (version.getText().equals(versionName)) {
                 isFound = true;
+            }
+        }
+        return isFound;
+    }
+
+    public boolean doesTheVersionExistsByStatus(String versionName, String status) {
+        clickOn(versions);
+        boolean isFound = false;
+        for (WebElement version : versionsTable) {
+            if (getText(version).equals(versionName)) {
+                if (getText(version.findElement(By.className("versions-table__status"))).equals(status)) {
+                    isFound = true;
+                }
             }
         }
         return isFound;
