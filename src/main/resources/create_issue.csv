@@ -1,13 +1,13 @@
-user,projectName,hasAccess
-USER1,TOUCAN project (TOUCAN),true
-USER1,COALA project (COALA,true
-USER1,JETI project (JETI),false
-USER2,TOUCAN project (TOUCAN),true
-USER2,COALA project (COALA,false
-USER2,JETI project (JETI),true
-USER3,TOUCAN project (TOUCAN),false
-USER3,COALA project (COALA,true
-USER3,JETI project (JETI),true
-USER4,TOUCAN project (TOUCAN),true
-USER4,COALA project (COALA,true
-USER4,JETI project (JETI),false
+user,projectName
+USER1,TOUCAN project (TOUCAN)
+USER1,COALA project (COALA)
+USER1,JETI project (JETI)
+USER2,TOUCAN project (TOUCAN)
+USER2,COALA project (COALA)
+USER2,JETI project (JETI)
+USER3,TOUCAN project (TOUCAN)
+USER3,COALA project (COALA)
+USER3,JETI project (JETI)
+USER4,TOUCAN project (TOUCAN)
+USER4,COALA project (COALA)
+USER4,JETI project (JETI)
