@@ -1,8 +1,9 @@
 package com.codecool.jira.logout;
 
 import com.codecool.jira.MainTest;
-import org.junit.Before;
+//import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page_object_model.logout.Logout;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LogoutTest extends MainTest {
     Logout logout;
 
-    @Before
+    @BeforeEach
     public void setup() {
         super.setUp();
     }
