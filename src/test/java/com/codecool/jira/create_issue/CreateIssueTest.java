@@ -24,7 +24,6 @@ public class CreateIssueTest extends MainTest {
     public void createIssue(String user, String projectName) {
         dashboard = new Dashboard(driver);
 
-        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         dashboard.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         dashboard.createIssueOnlyProject(projectName);
@@ -36,7 +35,6 @@ public class CreateIssueTest extends MainTest {
     public void createIssueGeneralCase(String projectName, String issueType, String summaryName) {
         dashboard = new Dashboard(driver);
 
-        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         dashboard.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
@@ -49,7 +47,6 @@ public class CreateIssueTest extends MainTest {
     public void deleteIssue(String projectName, String issueType, String summaryName, String expectedMessage) {
         dashboard = new Dashboard(driver);
 
-        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         dashboard.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
@@ -61,7 +58,6 @@ public class CreateIssueTest extends MainTest {
     public void createSubTask(String projectName, String issueType, String summaryName) {
         dashboard = new Dashboard(driver);
 
-        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         dashboard.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);

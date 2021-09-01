@@ -7,10 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Util;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class MainTest {
@@ -26,6 +23,7 @@ public class MainTest {
         }
         driver = Util.getDriver();
         dotenv = Dotenv.load();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         wait = Util.wait(driver, 10);
     }
