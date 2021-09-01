@@ -26,7 +26,7 @@ public class VersionTest extends MainTest {
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExists("test"));
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "Unreleased"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion("test", false);
@@ -43,7 +43,7 @@ public class VersionTest extends MainTest {
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "RELEASED"));
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "Released"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion("test", false);
@@ -60,7 +60,7 @@ public class VersionTest extends MainTest {
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExists("test_edited"));
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test_edited", "Unreleased"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion("test_edited", false);
@@ -77,9 +77,9 @@ public class VersionTest extends MainTest {
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test_edited", "ARCHIVED"));
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "Archived"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.deleteVersion("test", false);
+        glassVersion.deleteVersion("test", true);
     }
 }

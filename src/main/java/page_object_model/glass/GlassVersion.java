@@ -5,7 +5,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import page_object_model.PageBase;
+import util.Util;
 
 import java.util.List;
 
@@ -20,8 +22,6 @@ public class GlassVersion extends PageBase {
     @FindBy(css = ".error") private WebElement errorMessage;
     @FindBy(xpath = "//a[@data-version-type='released']") private WebElement releasedButton;
     @FindBy(xpath = "//a[@data-version-type='archived']") private WebElement archivedButton;
-    @FindBy(css = ".item-state-ready") private List<WebElement> rows;
-    @FindBy(css = ".details-button") private WebElement detailsButton;
     @FindBy(css = ".project-config-operations-archive") private WebElement archiveButton;
     @FindBy(css = ".project-config-operations-unarchive") private WebElement unarchiveButton;
     @FindBy(css = ".project-config-operations-delete") private WebElement deleteButton;
@@ -71,9 +71,11 @@ public class GlassVersion extends PageBase {
     }
 
     private void clickMenuButtonOnVersion(String versionName) {
+        WebElement table = driver.findElement(By.cssSelector(".ui-sortable"));
+        List<WebElement> rows = table.findElements(By.xpath("//tr"));
         for (WebElement row : rows) {
             if (getText(row.findElement(By.xpath("//tr//a[.='" + versionName + "']"))).equals(versionName)) {
-                clickOn(detailsButton);
+                clickOn(driver.findElement(By.cssSelector(".details-button")));
                 break;
             }
         }
@@ -90,6 +92,7 @@ public class GlassVersion extends PageBase {
         clickOn(editButton);
         sendMessage(editNameField, newName);
         clickOn(editSaveButton);
+        Util.wait(driver, TIME).until(ExpectedConditions.visibilityOf(addButton));
     }
 
     public void archiveVersion(String versionName) {
