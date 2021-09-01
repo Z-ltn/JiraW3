@@ -1,8 +1,6 @@
 package com.codecool.jira.edit_issue;
 
 import com.codecool.jira.MainTest;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page_object_model.Dashboard;
@@ -11,11 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EditIssueTest extends MainTest {
     Dashboard dashboard;
-
-    @Before
-    public void setup() {
-        super.setUp();
-    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/edit_issue.csv")
@@ -27,10 +20,5 @@ public class EditIssueTest extends MainTest {
         dashboard.openURL(url);
         assertEquals("editTest_edited", dashboard.editIssue("editTest_edited"));
         dashboard.editIssue("editTest");
-    }
-
-    @AfterEach
-    public void tearDown() {
-        super.tearDown();
     }
 }
