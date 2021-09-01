@@ -16,6 +16,7 @@ public class LogIn extends PageBase {
     @FindBy(id="up-d-username")@CacheLookup private WebElement loggedInUser;
     @FindBy(className="aui-message-error")@CacheLookup private WebElement incorrectMessage;
 
+
     public LogIn(WebDriver driver) {
         super(driver);
         this.driver = driver;
