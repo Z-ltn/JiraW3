@@ -23,6 +23,8 @@ public class Dashboard extends PageBase {
     @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
     @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
     @FindBy(id="create-subtask") private WebElement createSubtaskButton;
+    @FindBy(id="edit-issue") private WebElement editButton;
+    @FindBy(id="edit-issue-submit") private WebElement editSubmitButton;
     @FindBy(linkText="testSubTask") private WebElement testSubTask;
 
     public Dashboard(WebDriver driver) {
@@ -70,6 +72,21 @@ public class Dashboard extends PageBase {
         clickOn(createButton);
     }
 
+    public String editIssue() {
+        try {
+            Util.wait(driver, 2).until(ExpectedConditions.visibilityOf(editButton));
+        }
+        catch (TimeoutException ignored) {
+            return "Edit button not found";
+        }
+        clickOn(editButton);
+        clickOn(summaryName);
+        sendMessage(summaryName, "_edited");
+        clickOn(editSubmitButton);
+        reloadPage(driver);
+        return getText(issuePageSummaryName);
+    }
+
     public void createSubTask() {
         Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
         clickOn(issueLink);
@@ -99,9 +116,13 @@ public class Dashboard extends PageBase {
     }
 
     public String getIssuePageSummaryName() {
+        clickIssuePageSummaryName();
+        return getText(issuePageSummaryName);
+    }
+
+    public void clickIssuePageSummaryName() {
         Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
         clickOn(issueLink);
-        return getText(issuePageSummaryName);
     }
 
     public boolean getProjectPictureIsPresent() {
