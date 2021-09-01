@@ -1,13 +1,10 @@
 package page_object_model.glass;
 
-import keyword.Keyword;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import page_object_model.PageBase;
-import util.Util;
 
 import java.util.List;
 
@@ -44,5 +41,23 @@ public class GlassDocumentation extends PageBase {
             }
         }
         return isFound;
+    }
+
+    public void openVersionPage(String versionName) {
+        clickOn(versions);
+        for (WebElement version : versionsTable) {
+            if (getText(version).equals(versionName)) {
+                clickOn(version.findElement(By.linkText(versionName)));
+            }
+        }
+    }
+
+    public void changeTab() {
+        String currentTab = driver.getWindowHandle();
+        for (String tab : driver.getWindowHandles()) {
+            if (!tab.equals(currentTab)) {
+                driver.switchTo().window(tab);
+            }
+        }
     }
 }

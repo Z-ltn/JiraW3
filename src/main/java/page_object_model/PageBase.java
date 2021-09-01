@@ -37,6 +37,6 @@ public abstract class PageBase {
     }
 
     protected void refresh() {
-        refreshPage(driver);
+        reloadPage(driver);
     }
 }

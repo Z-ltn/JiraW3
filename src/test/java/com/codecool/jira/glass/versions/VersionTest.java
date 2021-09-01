@@ -2,8 +2,11 @@ package com.codecool.jira.glass.versions;
 
 import com.codecool.jira.MainTest;
 import org.junit.jupiter.api.Test;
+import page_object_model.Dashboard;
 import page_object_model.glass.GlassDocumentation;
 import page_object_model.glass.GlassVersion;
+import page_object_model.glass.GlassIssueAndVersionConnected;
+import page_object_model.projects.OpenIssue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class VersionTest extends MainTest {
     GlassVersion glassVersion;
     GlassDocumentation glassDocumentation;
-
 
     @Test
     public void glass_addNewVersion() {
@@ -81,5 +83,34 @@ public class VersionTest extends MainTest {
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion("test", true);
+    }
+
+    @Test
+    public void version_connectIssueWithVersion() {
+        glassVersion = new GlassVersion(driver);
+        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
+        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.addNewVersion("test");
+
+        Dashboard dashboard = new Dashboard(driver);
+        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+        dashboard.createIssueForGlass("Use It To Practice Project (PP)", "Task", "version_connection_test", false, "test");
+
+        glassDocumentation = new GlassDocumentation(driver);
+        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentation.openVersionPage("test");
+        glassDocumentation.changeTab();
+
+        GlassIssueAndVersionConnected glassIssueAndVersionConnected = new GlassIssueAndVersionConnected(driver);
+        String issueID = glassIssueAndVersionConnected.getIssueID("version_connection_test");
+
+        assertTrue(glassIssueAndVersionConnected.isIssueConnected("version_connection_test"));
+
+        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.deleteVersion("test", false);
+
+        OpenIssue openIssue = new OpenIssue(driver);
+        openIssue.openURL("https://jira-auto.codecool.metastage.net/projects/PP/issues/" + issueID);
+        openIssue.deleteIssue(issueID);
     }
 }
