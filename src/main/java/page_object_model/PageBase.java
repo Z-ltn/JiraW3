@@ -25,7 +25,7 @@ public abstract class PageBase {
     }
 
     public void login(String username, String password) {
-        openPage(driver, "https://jira-auto.codecool.metastage.net/login.jsp");
+        openURL("https://jira-auto.codecool.metastage.net/login.jsp");
         sendMessage(this.username, username);
         sendMessage(this.password, password);
         clickOn(logInButton);
