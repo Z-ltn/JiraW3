@@ -57,4 +57,7 @@ public class Keyword {
     public static void reloadPage(WebDriver driver) {
         driver.navigate().refresh();
     }
+    public static void clear(WebElement webElement) {
+        webElement.clear();
+    }
 }

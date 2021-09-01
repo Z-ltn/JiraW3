@@ -72,7 +72,7 @@ public class Dashboard extends PageBase {
         clickOn(createButton);
     }
 
-    public String editIssue() {
+    public String editIssue(String issueName) {
         try {
             Util.wait(driver, 2).until(ExpectedConditions.visibilityOf(editButton));
         }
@@ -81,7 +81,8 @@ public class Dashboard extends PageBase {
         }
         clickOn(editButton);
         clickOn(summaryName);
-        sendMessage(summaryName, "_edited");
+        clear(summaryName);
+        sendMessage(summaryName, issueName);
         clickOn(editSubmitButton);
         reloadPage(driver);
         return getText(issuePageSummaryName);

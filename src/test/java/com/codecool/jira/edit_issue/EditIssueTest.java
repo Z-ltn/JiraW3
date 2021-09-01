@@ -19,14 +19,14 @@ public class EditIssueTest extends MainTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/edit_issue.csv")
-    public void editIssue(String user, String projectName, String summaryName) {
+    public void editIssue(String user, String url) {
         dashboard = new Dashboard(driver);
 
         dashboard.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
-        dashboard.createIssue(projectName, "Task", summaryName, false);
-        dashboard.clickIssuePageSummaryName();
-        assertEquals(summaryName + "_edited", dashboard.editIssue());
+        dashboard.openURL(url);
+        assertEquals("editTest_edited", dashboard.editIssue("editTest_edited"));
+        dashboard.editIssue("editTest");
     }
 
     @AfterEach
