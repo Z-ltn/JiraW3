@@ -53,4 +53,11 @@ public class Keyword {
     }
 
     public static String getCurrentUrl(WebDriver driver) {return driver.getCurrentUrl();}
+
+    public static void reloadPage(WebDriver driver) {
+        driver.navigate().refresh();
+    }
+    public static void clear(WebElement webElement) {
+        webElement.clear();
+    }
 }
