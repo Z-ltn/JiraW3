@@ -158,7 +158,6 @@ public class Dashboard extends PageBase {
         openURL(currentUrl);
         WebElement deletedIssueMessage = driver.findElement(By.xpath("//*[@id='issue-content']/div/div/h1"));
         Util.wait(driver,TIME).until(ExpectedConditions.visibilityOf(deletedIssueMessage));
-
         return getText(deletedIssueMessage);
     }
 }

@@ -2,7 +2,6 @@ package com.codecool.jira.login;
 
 
 import com.codecool.jira.MainTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -19,7 +18,6 @@ public class LoginTest extends MainTest {
         String expected = dotenv.get(user);
 
         login = new LogIn(driver);
-//        login.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         login.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));

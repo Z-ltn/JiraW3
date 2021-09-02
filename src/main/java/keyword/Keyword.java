@@ -16,6 +16,10 @@ public class Keyword {
         driver.close();
     }
 
+    public static void refreshPage(WebDriver driver) {
+        driver.navigate().refresh();
+    }
+
     public static String currentUrl(WebDriver driver) {
         return driver.getCurrentUrl();
     }
