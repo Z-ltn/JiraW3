@@ -44,7 +44,6 @@ public class BrowseProjectsTest extends MainTest {
     }
 
 
- ///Leaks memory (data,), doesn't close browser if run together.
     @ParameterizedTest
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void browseForNonExistentProject(String key) {

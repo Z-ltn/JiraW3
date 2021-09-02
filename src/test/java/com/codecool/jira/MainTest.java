@@ -30,6 +30,6 @@ public class MainTest {
 
     @AfterEach
     protected void tearDown() {
-        driver.close();
+        driver.quit();
     }
 }
