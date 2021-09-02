@@ -15,10 +15,10 @@ public class IssueTypesInGlassTest extends MainTest {
     public void issueTypesInGlass() {
         glassIssueTypes = new GlassIssueTypes(driver);
         glassIssueTypes.login(dotenv.get("USER4"), dotenv.get("PASSWORD"));
-        glassIssueTypes.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/summary");
+
         List<String> types = glassIssueTypes.getTypes();
-        glassIssueTypes.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
-        List<String> actual = glassIssueTypes.getActualTypes();
+        List<String> actual = glassIssueTypes.getGlassTypes();
+
         assertEquals(types, actual);
     }
 }
