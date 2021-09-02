@@ -13,8 +13,4 @@ public class Util {
     public static WebDriverWait wait(WebDriver driver, int time) {
         return new WebDriverWait(driver, time);
     }
-    public static void waitFor(WebElement element) {
-        WebDriverWait wait = wait(getDriver(), 10);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
 }

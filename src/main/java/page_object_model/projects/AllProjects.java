@@ -3,6 +3,7 @@ package page_object_model.projects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import page_object_model.PageBase;
 import util.Util;
 
@@ -25,6 +26,6 @@ public class AllProjects extends PageBase {
     }
 
     public void waitForNothing() {
-        Util.waitFor(noResult);
+        Util.wait(driver,3).until(ExpectedConditions.visibilityOf(noResult));
     }
 }

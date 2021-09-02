@@ -31,7 +31,7 @@ public class BrowseProjectsTest extends MainTest {
         assertEquals(key, getText(summaryPage.getKey()));
     }
 
-    @ParameterizedTest //starnge bug: new blank windows got opened
+    @ParameterizedTest
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void searchForNonExistentProject(String summaryName) {
         search = new AllProjects(driver);
