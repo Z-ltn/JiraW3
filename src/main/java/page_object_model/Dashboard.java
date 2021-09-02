@@ -84,20 +84,31 @@ public class Dashboard extends PageBase {
         Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
     }
 
-    public String editIssue(String issueName) {
-        try {
-            Util.wait(driver, 2).until(ExpectedConditions.visibilityOf(editButton));
-        }
-        catch (TimeoutException ignored) {
-            return "Edit button not found";
-        }
+    public void editIssue(String issueName) throws InterruptedException {
+//        try {
+//            Util.wait(driver, 2).until(ExpectedConditions.visibilityOf(editButton));
+//        }
+//        catch (TimeoutException ignored) {
+//            return;
+//        }
         clickOn(editButton);
         clickOn(summaryName);
         clear(summaryName);
         sendMessage(summaryName, issueName);
         clickOn(editSubmitButton);
+//        Util.wait(driver,5).until(ExpectedConditions.visibilityOf(issuePageSummaryName));
+        Thread.sleep(5000);
         reloadPage(driver);
-        return getText(issuePageSummaryName);
+
+//        Util.wait(driver, 5).until(ExpectedConditions.visibilityOf(issuePageSummaryName));
+    }
+
+    public boolean canEditIssue(){
+        try { return isDisplayed(editButton);}
+        catch (NoSuchElementException e) {
+            return false;
+        }
+
     }
 
     public void createSubTask() {
@@ -128,6 +139,9 @@ public class Dashboard extends PageBase {
         return testSubTask.isDisplayed();
     }
 
+    public String getEditedSummaryName() {
+        return getText(issuePageSummaryName);
+    }
     public String getIssuePageSummaryName() {
         clickIssuePageSummaryName();
         return getText(issuePageSummaryName);

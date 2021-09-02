@@ -6,19 +6,24 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import page_object_model.Dashboard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class EditIssueTest extends MainTest {
     Dashboard dashboard;
 
     @ParameterizedTest
     @CsvFileSource(resources = "/edit_issue.csv")
-    public void editIssue(String user, String url) {
+    public void editIssue(String user, String url) throws InterruptedException {
         dashboard = new Dashboard(driver);
 
         dashboard.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         dashboard.openURL(url);
-        assertEquals("editTest_edited", dashboard.editIssue("editTest_edited"));
+        if (!dashboard.canEditIssue()){
+            fail( "The user has no permission to edit, or open the issue");
+        }
+        dashboard.editIssue("editTest_edited");
+        assertEquals("editTest_edited", dashboard.getEditedSummaryName());
         dashboard.editIssue("editTest");
     }
 }
