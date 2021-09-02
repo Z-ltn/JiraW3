@@ -26,6 +26,7 @@ public class Dashboard extends PageBase {
     @FindBy(id="edit-issue") private WebElement editButton;
     @FindBy(id="edit-issue-submit") private WebElement editSubmitButton;
     @FindBy(linkText="testSubTask") private WebElement testSubTask;
+    @FindBy(id="fixVersions-textarea") private WebElement fixVersions;
 
     public Dashboard(WebDriver driver) {
         super(driver);
@@ -70,6 +71,92 @@ public class Dashboard extends PageBase {
         if (another) clickOn(this.another);
         Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(createButton));
         clickOn(createButton);
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+    }
+
+    public void createIssueForGlass(String projectName, String issueType, String summaryName, boolean another, String versionName) {
+        singleIssue(projectName, issueType, summaryName);
+        if (another) clickOn(this.another);
+        sendMessage(fixVersions, versionName);
+        sendKey(fixVersions, Keys.RETURN);
+        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(createButton));
+        clickOn(createButton);
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+    }
+
+    public String editIssue(String issueName) {
+        try {
+            Util.wait(driver, 2).until(ExpectedConditions.visibilityOf(editButton));
+        }
+        catch (TimeoutException ignored) {
+            return "Edit button not found";
+        }
+        clickOn(editButton);
+        clickOn(summaryName);
+        clear(summaryName);
+        sendMessage(summaryName, issueName);
+        clickOn(editSubmitButton);
+        reloadPage(driver);
+        return getText(issuePageSummaryName);
+    }
+
+    public void createSubTask() {
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+        clickOn(issueLink);
+        clickOn(moreButton);
+        clickOn(createSubtaskButton);
+        sendMessage(summaryName, "testSubTask");
+        clickOn(createButton);
+    }
+
+    public void deleteIssue() {
+        clickOn(moreButton);
+        clickOn(deleteButton);
+        clickOn(deleteIssueSubmitButton);
+    }
+
+    public void createIssueOnlyProject(String projectName) {
+        clickOn(createIssue);
+        Util.wait(driver, 10).until(ExpectedConditions.visibilityOf(projectField));
+        clickOn(projectField);
+        sendKey(projectField, Keys.BACK_SPACE);
+        sendMessage(projectField, projectName);
+        sendKey(projectField, Keys.RETURN);
+    }
+
+    public boolean getTestSubtaskIsDisplayed() {
+        return testSubTask.isDisplayed();
+    }
+
+    public String getIssuePageSummaryName() {
+        clickIssuePageSummaryName();
+        return getText(issuePageSummaryName);
+    }
+
+    public void clickIssuePageSummaryName() {
+        Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
+        clickOn(issueLink);
+    }
+
+    public boolean getProjectPictureIsPresent() {
+        try {
+            Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(projectPicture));
+        }
+        catch (StaleElementReferenceException ignored) {
+            getProjectPictureIsPresent();
+        }
+        catch (TimeoutException ignored) {
+            return false;
+        }
+        return true;
+    }
+
+    public String getDeletedIssueMessage() {
+        getIssuePageSummaryName();
+        String currentUrl = getCurrentUrl(driver);
+        deleteIssue();
+        openURL(currentUrl);
+        return getText(deletedIssueMessage);
     }
 
     public String editIssue(String issueName) {

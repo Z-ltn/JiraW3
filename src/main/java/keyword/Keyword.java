@@ -60,4 +60,8 @@ public class Keyword {
     public static void clear(WebElement webElement) {
         webElement.clear();
     }
+
+    public static boolean isDisplayed(WebElement webElement) {
+        return webElement.isDisplayed();
+    }
 }
