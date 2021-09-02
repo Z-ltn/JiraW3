@@ -2,9 +2,8 @@ package com.codecool.jira.login;
 
 
 import com.codecool.jira.MainTest;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page_object_model.login.LogIn;
@@ -13,11 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTest extends MainTest {
     LogIn login;
-
-    @Before
-    public void setup() {
-        super.setUp();
-    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)

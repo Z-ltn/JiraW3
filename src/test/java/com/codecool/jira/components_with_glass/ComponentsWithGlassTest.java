@@ -1,7 +1,6 @@
 package com.codecool.jira.components_with_glass;
 
 import com.codecool.jira.MainTest;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -11,11 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ComponentsWithGlassTest extends MainTest {
     Components components;
-
-    @Before
-    public void setup() {
-        super.setUp();
-    }
 
     @ParameterizedTest
     @CsvSource({"ComponentTest,Unassigned,ComponentTestEdited"})

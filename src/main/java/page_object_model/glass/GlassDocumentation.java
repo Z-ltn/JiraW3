@@ -7,11 +7,11 @@ import page_object_model.PageBase;
 
 public class GlassDocumentation extends PageBase {
     @FindBy(id = "aui-uid-1")
-    private WebElement components;
+    protected WebElement components;
     @FindBy(id = "aui-uid-2")
-    private WebElement versions;
+    protected WebElement versions;
     @FindBy(xpath = "//a[@class='header-nav-item'][text()='Permissions']")
-    private WebElement permissions;
+    protected WebElement permissions;
     @FindBy(xpath = "//td[@class='glass-meta-label'][text()='Default Assignee']/following-sibling::td/descendant::span/descendant::a")
     private WebElement DefaultAssignee;
     @FindBy(xpath = "//td[@class='glass-meta-label'][text()='Lead']/following-sibling::td/descendant::span/descendant::a")
