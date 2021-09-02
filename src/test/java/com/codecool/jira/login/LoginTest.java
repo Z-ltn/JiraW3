@@ -2,9 +2,6 @@ package com.codecool.jira.login;
 
 
 import com.codecool.jira.MainTest;
-//import org.junit.Before;
-//import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,18 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LoginTest extends MainTest {
     LogIn login;
 
-    @BeforeEach
-    public void setup() {
-        super.setUp();
-    }
-
     @ParameterizedTest
     @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_fromDashboard(String user) {
         String expected = dotenv.get(user);
 
         login = new LogIn(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+//        login.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         login.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
@@ -42,7 +34,6 @@ public class LoginTest extends MainTest {
         login.loginUsingEmptyCredentials();
 
         assertTrue(login.validateErrorMessage(expected));
-        super.tearDown();
     }
 
     @ParameterizedTest
@@ -79,10 +70,5 @@ public class LoginTest extends MainTest {
         login.captcha(user);
 
         assertTrue(login.validateCaptcha(expected));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        super.tearDown();
     }
 }

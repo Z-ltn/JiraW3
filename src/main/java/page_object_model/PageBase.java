@@ -11,11 +11,11 @@ import util.Util;
 import static keyword.Keyword.*;
 
 public abstract class PageBase {
-    WebDriver driver;
+    protected WebDriver driver;
     @FindBy(id="login-form-username")@CacheLookup protected WebElement username;
     @FindBy(id="login-form-password")@CacheLookup protected WebElement password;
     @FindBy(xpath="//input[@value='Log In']")@CacheLookup protected WebElement logInButton;
-    @FindBy(id="header-details-user-fullname") public WebElement avatarPicture;
+    @FindBy(id="header-details-user-fullname") protected WebElement avatarPicture;
     @FindBy(id="log_out") protected WebElement logOutButton;
     @FindBy(id= "footer-logo")@CacheLookup private WebElement footerLogo;
 
@@ -30,7 +30,6 @@ public abstract class PageBase {
     public void login(String username, String password) {
         openURL("https://jira-auto.codecool.metastage.net/login.jsp");
         Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(footerLogo));
-        System.out.println("login");
         sendMessage(this.username, username);
         sendMessage(this.password, password);
         clickOn(logInButton);
@@ -40,4 +39,13 @@ public abstract class PageBase {
         clickOn(avatarPicture);
         clickOn(logOutButton);
     }
+
+    protected void refresh() {
+        reloadPage(driver);
+    }
+
+    public void close(){
+        driver.close();
+    }
 }
+

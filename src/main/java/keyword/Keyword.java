@@ -51,4 +51,17 @@ public class Keyword {
     public static void select(Select select, String value) {
         select.selectByValue(value);
     }
+
+    public static String getCurrentUrl(WebDriver driver) {return driver.getCurrentUrl();}
+
+    public static void reloadPage(WebDriver driver) {
+        driver.navigate().refresh();
+    }
+    public static void clear(WebElement webElement) {
+        webElement.clear();
+    }
+
+    public static boolean isDisplayed(WebElement webElement) {
+        return webElement.isDisplayed();
+    }
 }
