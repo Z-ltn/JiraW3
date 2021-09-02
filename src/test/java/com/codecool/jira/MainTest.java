@@ -14,6 +14,7 @@ public class MainTest {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected static Dotenv dotenv;
+    //protected static Set<String> users = new HashSet<>(Arrays.asList("USER1", "USER2", "USER3", "USER4"));
 
     @BeforeEach
     protected void setUp() {

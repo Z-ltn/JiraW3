@@ -19,7 +19,6 @@ public class LoginTest extends MainTest {
         String expected = dotenv.get(user);
 
         login = new LogIn(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         login.login(dotenv.get(user), dotenv.get("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
@@ -71,10 +70,5 @@ public class LoginTest extends MainTest {
         login.captcha(user);
 
         assertTrue(login.validateCaptcha(expected));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        super.tearDown();
     }
 }

@@ -38,4 +38,8 @@ public abstract class PageBase {
         clickOn(avatarPicture);
         clickOn(logOutButton);
     }
+
+    protected void refresh() {
+        reloadPage(driver);
+    }
 }

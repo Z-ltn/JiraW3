@@ -17,15 +17,9 @@ public class LogoutTest extends MainTest {
         String expected = "If you think you shouldn't get this message, please contact your Jira administrators.";
 
         logout = new Logout(driver);
-        logout.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
         logout.login(dotenv.get(user), dotenv.get("PASSWORD"));
         logout.logout();
 
         assertTrue(logout.validateLogout(expected));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        super.tearDown();
     }
 }
