@@ -14,22 +14,16 @@ import static keyword.Keyword.openPage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BrowseProjectsTest extends MainTest {
-    private static ProjectSummary summaryPage;
-    private static AllProjects search;
-    private static NonExistent non;
-
-    @BeforeEach
-    public void init() {
-        summaryPage = new ProjectSummary(driver);
-        search = new AllProjects(driver);
-        non = new NonExistent(driver);
-    }
+    ProjectSummary summaryPage;
+    AllProjects search;
+    NonExistent non;
 
     @ParameterizedTest
     @CsvFileSource(resources = "/projects.csv", numLinesToSkip = 1)
     public void browseProject_generalCase(String title, String lead, String key) {
+        summaryPage = new ProjectSummary(driver);
         summaryPage.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
-        openPage(driver, "https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
+        summaryPage.openURL("https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
         wait.until(ExpectedConditions.visibilityOf(summaryPage.getTitle()));
 
         assertEquals(title, getText(summaryPage.getTitle()));
@@ -40,20 +34,23 @@ public class BrowseProjectsTest extends MainTest {
     @ParameterizedTest //starnge bug: new blank windows got opened
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void searchForNonExistentProject(String summaryName) {
+        search = new AllProjects(driver);
         search.login(dotenv.get("USER2"), dotenv.get("PASSWORD"));
-        openPage(driver, "https://jira-auto.codecool.metastage.net/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all");
-
+        search.openURL("https://jira-auto.codecool.metastage.net/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all");
         search.searchForProject(summaryName);
         search.waitForNothing();
 
         assertEquals("No projects were found to match your search", search.getMessage());
     }
 
+
+ ///Leaks memory (data,), doesn't close browser if run together.
     @ParameterizedTest
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void browseForNonExistentProject(String key) {
+        non = new NonExistent(driver);
         non.login(dotenv.get("USER2"), dotenv.get("PASSWORD"));
-        openPage(driver, "https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
+        non.openURL("https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
 
         assertEquals("You can't view this project It may have been deleted or you don't have permission to view it.", non.getMessage());
     }

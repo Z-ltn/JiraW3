@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LogoutTest extends MainTest {
     Logout logout;
 
+
     @ParameterizedTest
     @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void logoutTest(String user) {

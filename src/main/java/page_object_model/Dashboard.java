@@ -21,7 +21,7 @@ public class Dashboard extends PageBase {
     @FindBy(id="opsbar-operations_more") private WebElement moreButton;
     @FindBy(xpath = "//*[@id=\"delete-issue\"]/a") private WebElement deleteButton;
     @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
-    @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
+//    @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
     @FindBy(id="create-subtask") private WebElement createSubtaskButton;
     @FindBy(id="edit-issue") private WebElement editButton;
     @FindBy(id="edit-issue-submit") private WebElement editSubmitButton;
@@ -156,7 +156,8 @@ public class Dashboard extends PageBase {
         String currentUrl = getCurrentUrl(driver);
         deleteIssue();
         openURL(currentUrl);
+        WebElement deletedIssueMessage = driver.findElement(By.xpath("//*[@id='issue-content']/div/div/h1"));
+        Util.wait(driver,TIME).until(ExpectedConditions.visibilityOf(deletedIssueMessage));
         return getText(deletedIssueMessage);
     }
-
 }

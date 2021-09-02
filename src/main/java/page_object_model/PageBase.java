@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import util.Util;
 
 import static keyword.Keyword.*;
 
@@ -17,6 +19,7 @@ public abstract class PageBase {
     @FindBy(xpath="//input[@value='Log In']")@CacheLookup protected WebElement logInButton;
     @FindBy(id="header-details-user-fullname") protected WebElement avatarPicture;
     @FindBy(id="log_out") protected WebElement logOutButton;
+    @FindBy(id= "footer-logo")@CacheLookup private WebElement footerLogo;
 
     public PageBase(WebDriver driver) {
         this.driver = driver;
@@ -29,6 +32,7 @@ public abstract class PageBase {
 
     public void login(String username, String password) {
         openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(footerLogo));
         sendMessage(this.username, username);
         sendMessage(this.password, password);
         clickOn(logInButton);
@@ -42,4 +46,9 @@ public abstract class PageBase {
     protected void refresh() {
         reloadPage(driver);
     }
+
+    public void close(){
+        driver.close();
+    }
 }
+
