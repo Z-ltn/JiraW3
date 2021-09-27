@@ -39,19 +39,20 @@ public class VersionTest extends MainTest {
 
     @Test
     public void glass_releaseVersion() {
+        versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
         glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.addNewVersion("test");
-        glassVersion.releaseVersion("test");
+        glassVersion.addNewVersion(versionName);
+        glassVersion.releaseVersion(versionName);
 
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "Released"));
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus(versionName, "Released"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.deleteVersion("test", false);
+        glassVersion.deleteVersion(versionName, false);
     }
 
     @Test
