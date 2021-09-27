@@ -36,8 +36,8 @@ public class GlassVersion extends PageBase {
         super(driver);
     }
 
-    public void addNewVersionWithWrongReleaseDate() {
-        sendMessage(versionName, "test");
+    public void addNewVersionWithWrongReleaseDate(String versionName) {
+        sendMessage(this.versionName, versionName);
         sendMessage(startDate, "6/aug/21");
         sendMessage(releaseDate, "1/aug/21");
         sendMessage(description, "test_description");

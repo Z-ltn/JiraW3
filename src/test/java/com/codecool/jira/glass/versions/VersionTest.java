@@ -14,13 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class VersionTest extends MainTest {
     GlassVersion glassVersion;
     GlassDocumentation glassDocumentation;
+    String versionName;
+    String editVersionName;
 
     @Test
     public void glass_addNewVersion() {
+        versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
         glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.addNewVersionWithWrongReleaseDate();
+        glassVersion.addNewVersionWithWrongReleaseDate(versionName);
 
         assertEquals("The start date cannot be after the release date.", glassVersion.getErrorMessage());
 
@@ -28,10 +31,10 @@ public class VersionTest extends MainTest {
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
-        assertTrue(glassDocumentation.doesTheVersionExistsByStatus("test", "Unreleased"));
+        assertTrue(glassDocumentation.doesTheVersionExistsByStatus(versionName, "Unreleased"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.deleteVersion("test", false);
+        glassVersion.deleteVersion(versionName, false);
     }
 
     @Test
