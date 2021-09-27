@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Util;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class MainTest {
@@ -32,4 +33,13 @@ public class MainTest {
     protected void tearDown() {
         driver.quit();
     }
+
+    public static String generateRandomString(int len) {
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        return sb.toString();
+        }
 }
