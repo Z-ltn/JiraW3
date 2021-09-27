@@ -2,6 +2,7 @@ package com.codecool.jira.login;
 
 
 import com.codecool.jira.MainTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -58,8 +59,9 @@ public class LoginTest extends MainTest {
         assertTrue(login.validateLogin(expected));
     }
 
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
+    @Disabled("Captcha cannot be automated")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_captchaAfter3rdTry(String user) {
         String expected = "Sorry, your userid is required to answer a CAPTCHA question correctly.";
 
