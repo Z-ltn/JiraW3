@@ -94,18 +94,19 @@ public class VersionTest extends MainTest {
 
     @Test
     public void version_connectIssueWithVersion() {
+        versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
         glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.addNewVersion("test");
+        glassVersion.addNewVersion(versionName);
 
         Dashboard dashboard = new Dashboard(driver);
         dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
-        dashboard.createIssueForGlass("Use It To Practice Project (PP)", "Task", "version_connection_test", false, "test");
+        dashboard.createIssueForGlass("Use It To Practice Project (PP)", "Task", "version_connection_test", false, versionName);
 
         glassDocumentation = new GlassDocumentation(driver);
         glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
-        glassDocumentation.openVersionPage("test");
+        glassDocumentation.openVersionPage(versionName);
         glassDocumentation.changeTab();
 
         GlassIssueAndVersionConnected glassIssueAndVersionConnected = new GlassIssueAndVersionConnected(driver);
@@ -114,7 +115,7 @@ public class VersionTest extends MainTest {
         assertTrue(glassIssueAndVersionConnected.isIssueConnected("version_connection_test"));
 
         glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
-        glassVersion.deleteVersion("test", false);
+        glassVersion.deleteVersion(versionName, false);
 
         OpenIssue openIssue = new OpenIssue(driver);
         openIssue.openURL("https://jira-auto.codecool.metastage.net/projects/PP/issues/" + issueID);
