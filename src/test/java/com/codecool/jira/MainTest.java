@@ -26,7 +26,11 @@ public class MainTest {
         dotenv = Dotenv.load();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        wait = Util.wait(driver, 10);
+        String timeout = System.getProperty("timeout");
+        System.out.println(timeout);
+        System.out.println(timeout);
+        System.out.println(timeout);
+        wait = Util.wait(driver, Integer.parseInt(timeout));
     }
 
     @AfterEach
