@@ -27,9 +27,9 @@ public class MainTest {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         String timeout = System.getProperty("timeout");
-        System.out.println(timeout);
-        System.out.println(timeout);
-        System.out.println(timeout);
+        if(timeout == null) {
+            timeout = "4";
+        }
         wait = Util.wait(driver, Integer.parseInt(timeout));
     }
 
