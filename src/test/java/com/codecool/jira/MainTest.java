@@ -28,7 +28,7 @@ public class MainTest {
         driver.manage().window().maximize();
         String timeout = System.getProperty("timeout");
         if(timeout == null) {
-            timeout = "4";
+            timeout = "10";
         }
         wait = Util.wait(driver, Integer.parseInt(timeout));
     }
