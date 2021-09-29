@@ -12,7 +12,7 @@ import static keyword.Keyword.TIME;
 import static keyword.Keyword.getText;
 
 public class Logout extends PageBase{
-   @FindBy(xpath="//*[@id=\"login-form\"]/div[1]/div[1]/p[2]") protected WebElement warningMessage;
+   @FindBy(xpath="//div[@class='aui-message aui-message-warning']/p[2]") protected WebElement warningMessage;
 
     public Logout(WebDriver driver) {
         super(driver);
