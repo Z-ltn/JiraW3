@@ -21,19 +21,19 @@ public class VersionTest extends MainTest {
     public void glass_addNewVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersionWithWrongReleaseDate(versionName);
 
         assertEquals("The start date cannot be after the release date.", glassVersion.getErrorMessage());
 
         glassVersion.changeReleaseDate();
         glassDocumentation = new GlassDocumentation(driver);
-        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentation.openURL(glassVersion.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertTrue(glassDocumentation.doesTheVersionExistsByStatus(versionName, "Unreleased"));
 
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion(versionName, false);
     }
 
@@ -41,17 +41,17 @@ public class VersionTest extends MainTest {
     public void glass_releaseVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
         glassVersion.releaseVersion(versionName);
 
         glassDocumentation = new GlassDocumentation(driver);
-        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentation.openURL(glassVersion.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertTrue(glassDocumentation.doesTheVersionExistsByStatus(versionName, "Released"));
 
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion(versionName, false);
     }
 
@@ -60,17 +60,17 @@ public class VersionTest extends MainTest {
         versionName = generateRandomString(6);
         editVersionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
         glassVersion.editVersion(versionName, editVersionName);
 
         glassDocumentation = new GlassDocumentation(driver);
-        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentation.openURL(glassVersion.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertTrue(glassDocumentation.doesTheVersionExistsByStatus(editVersionName, "Unreleased"));
 
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion(editVersionName, false);
     }
 
@@ -78,17 +78,17 @@ public class VersionTest extends MainTest {
     public void glass_archiveVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
         glassVersion.archiveVersion(versionName);
 
         glassDocumentation = new GlassDocumentation(driver);
-        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentation.openURL(glassVersion.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertTrue(glassDocumentation.doesTheVersionExistsByStatus(versionName, "Archived"));
 
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion(versionName, true);
     }
 
@@ -96,16 +96,16 @@ public class VersionTest extends MainTest {
     public void version_connectIssueWithVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(dotenv.get("USER3"),dotenv.get("PASSWORD"));
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
 
         Dashboard dashboard = new Dashboard(driver);
-        dashboard.openURL("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+        dashboard.openURL(glassVersion.getBaseURL() + "/secure/Dashboard.jspa");
         dashboard.createIssueForGlass("Use It To Practice Project (PP)", "Task", "version_connection_test", false, versionName);
 
         glassDocumentation = new GlassDocumentation(driver);
-        glassDocumentation.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentation.openURL(glassVersion.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
         glassDocumentation.openVersionPage(versionName);
         glassDocumentation.changeTab();
 
@@ -114,11 +114,11 @@ public class VersionTest extends MainTest {
 
         assertTrue(glassIssueAndVersionConnected.isIssueConnected("version_connection_test"));
 
-        glassVersion.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/administer-versions");
+        glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.deleteVersion(versionName, false);
 
         OpenIssue openIssue = new OpenIssue(driver);
-        openIssue.openURL("https://jira-auto.codecool.metastage.net/projects/PP/issues/" + issueID);
+        openIssue.openURL(glassVersion.getBaseURL() + "/projects/PP/issues/" + issueID);
         openIssue.deleteIssue(issueID);
     }
 }

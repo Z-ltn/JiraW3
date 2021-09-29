@@ -24,7 +24,7 @@ public class LogIn extends PageBase {
 
     public Boolean validateLogin(String expected) {
         Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(avatarPicture));
-        openPage(driver, "https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
+        openPage(driver, getBaseURL() + "/secure/ViewProfile.jspa");
         return expected.equals(getText(loggedInUser));
     }
 

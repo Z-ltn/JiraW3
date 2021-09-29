@@ -79,7 +79,7 @@ public class Components extends PageBase {
     }
 
     public void deleteComponent(String editComponentName) {
-        openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page");
+        openURL(getBaseURL() + "/projects/PP?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page");
         for (WebElement componentRow : componentTableRows) {
             if (componentRow.findElement(By.cssSelector(".components-table__name")).getText().equals(editComponentName)) {
                 componentRow.findElement(By.cssSelector(".dynamic-table__actions")).findElement(By.cssSelector(".aui-iconfont-more")).click();

@@ -16,18 +16,6 @@ public class Keyword {
         driver.close();
     }
 
-    public static void refreshPage(WebDriver driver) {
-        driver.navigate().refresh();
-    }
-
-    public static String currentUrl(WebDriver driver) {
-        return driver.getCurrentUrl();
-    }
-
-    public static String getTitle(WebDriver driver) {
-        return driver.getTitle();
-    }
-
     public static void clickOn(WebElement webElement) {
         webElement.click();
     }
@@ -44,10 +32,6 @@ public class Keyword {
         return webElement.getText();
     }
 
-    public static String getValue(WebElement webElement) {
-        return webElement.getAttribute("value");
-    }
-
     public static boolean isSelected(WebElement webElement) {
         return webElement.isSelected();
     }
@@ -61,11 +45,28 @@ public class Keyword {
     public static void reloadPage(WebDriver driver) {
         driver.navigate().refresh();
     }
+
     public static void clear(WebElement webElement) {
         webElement.clear();
     }
 
     public static boolean isDisplayed(WebElement webElement) {
         return webElement.isDisplayed();
+    }
+
+    public static void refreshPage(WebDriver driver) {
+        driver.navigate().refresh();
+    }
+
+    public static String currentUrl(WebDriver driver) {
+        return driver.getCurrentUrl();
+    }
+
+    public static String getValue(WebElement webElement) {
+        return webElement.getAttribute("value");
+    }
+
+    public static String getTitle(WebDriver driver) {
+        return driver.getTitle();
     }
 }

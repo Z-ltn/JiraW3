@@ -21,7 +21,6 @@ public class Dashboard extends PageBase {
     @FindBy(id="opsbar-operations_more") private WebElement moreButton;
     @FindBy(xpath = "//*[@id=\"delete-issue\"]/a") private WebElement deleteButton;
     @FindBy(id="delete-issue-submit") private WebElement deleteIssueSubmitButton;
-//    @FindBy(xpath="//*[@id=\"issue-content\"]/div/div/h1") private WebElement deletedIssueMessage;
     @FindBy(id="create-subtask") private WebElement createSubtaskButton;
     @FindBy(id="edit-issue") private WebElement editButton;
     @FindBy(id="edit-issue-submit") private WebElement editSubmitButton;
@@ -32,7 +31,6 @@ public class Dashboard extends PageBase {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
-//        openPage(driver, "https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
     }
 
     private void singleIssue(String projectName, String issueType, String summaryName) {
@@ -84,20 +82,15 @@ public class Dashboard extends PageBase {
         Util.wait(driver, 10).until(ExpectedConditions.elementToBeClickable(issueLink));
     }
 
-    public void editIssue(String issueName) throws InterruptedException {
-//        try {
-//            Util.wait(driver, 2).until(ExpectedConditions.visibilityOf(editButton));
-//        }
-//        catch (TimeoutException ignored) {
-//            return;
-//        }
+    public void editIssue(String issueName) {
         clickOn(editButton);
         clickOn(summaryName);
         clear(summaryName);
         sendMessage(summaryName, issueName);
         clickOn(editSubmitButton);
-//        Util.wait(driver,5).until(ExpectedConditions.visibilityOf(issuePageSummaryName));
-        Thread.sleep(5000);
+        try {
+            Util.wait(driver,15).until(ExpectedConditions.visibilityOf(issuePageSummaryName));
+        } catch (StaleElementReferenceException ignored) {}
         reloadPage(driver);
 
 //        Util.wait(driver, 5).until(ExpectedConditions.visibilityOf(issuePageSummaryName));

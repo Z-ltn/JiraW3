@@ -15,7 +15,6 @@ import javax.xml.xpath.XPath;
 import java.security.Key;
 
 public class IssuePage extends PageBase {
-    WebDriver driver;
     @FindBy(id="summary-val")@CacheLookup private WebElement summaryName;
     @FindBy(id="type-val")@CacheLookup private WebElement issueType;
     @FindBy(id="key-val")@CacheLookup private WebElement issueTypeKey;

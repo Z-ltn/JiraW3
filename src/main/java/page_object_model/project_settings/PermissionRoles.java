@@ -3,8 +3,6 @@ package page_object_model.project_settings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import util.Util;
 
 public enum PermissionRoles {
     browseProjects("Browse Projects", "BROWSE_PROJECTS"),
@@ -17,6 +15,7 @@ public enum PermissionRoles {
     private final String title;
     private String xpath;
     private final String key;
+    private final String baseURL = System.getProperty("baseURL");
 
     PermissionRoles(String title, String key) {
         this.title = title;
@@ -25,7 +24,7 @@ public enum PermissionRoles {
     }
 
     public WebElement getElement(WebDriver driver) {
-        driver.get("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/permissions");
+        driver.get(baseURL + "/plugins/servlet/project-config/PP/permissions");
         return driver.findElement(By.xpath(xpath));
     }
 

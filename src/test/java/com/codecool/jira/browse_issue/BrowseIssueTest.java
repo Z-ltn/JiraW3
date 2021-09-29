@@ -8,11 +8,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.NoSuchElementException;
 import page_object_model.browseIssue.IssuePage;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+@Execution(ExecutionMode.CONCURRENT)
 public class BrowseIssueTest extends MainTest {
     IssuePage issuePage;
 
@@ -23,13 +26,11 @@ public class BrowseIssueTest extends MainTest {
 
     @Test
     public void  testBrowseIssue(){
-        issuePage.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
+        issuePage.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
         String expectedName = "DO_NOT_DELETE";
         String expectedType = "Story";
         String expectedTicketID = "MTP-767";
-
-
-        issuePage.openURL("https://jira-auto.codecool.metastage.net/browse/MTP-767");
+        issuePage.openURL(issuePage.getBaseURL() +  "/browse/MTP-767");
         assertEquals(expectedName,issuePage.getSummaryNameText());
         assertEquals(expectedType,issuePage.getIssueTypeText());
         assertEquals(expectedTicketID,issuePage.getIssueTypeKeyText());
@@ -38,7 +39,7 @@ public class BrowseIssueTest extends MainTest {
 
     @Test
     public void browseIssue_nonExistentIssue() {
-        issuePage.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
+        issuePage.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
         String expected = "No issues were found to match your search\n" +
                 "Try modifying your search criteria or creating a new issue.";
 
@@ -51,7 +52,7 @@ public class BrowseIssueTest extends MainTest {
     @CsvFileSource(resources = "/browse_issue_data.csv", numLinesToSkip = 1)
     public void browseIssue(String userName, String expected, String projectUrl) {
 
-        issuePage.login(dotenv.get(userName), dotenv.get("PASSWORD"));
+        issuePage.login(System.getProperty(userName), System.getProperty("PASSWORD"));
 
             issuePage.openURL(projectUrl);
             String actual = "";

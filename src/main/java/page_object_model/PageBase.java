@@ -11,9 +11,10 @@ import util.Util;
 
 import static keyword.Keyword.*;
 
-public abstract class PageBase {
+public abstract class PageBase { //TODO: caching seems unnecessary
     protected WebDriver driver;
     protected JavascriptExecutor js;
+    protected final String baseURL = System.getProperty("baseURL");
     @FindBy(id="login-form-username")@CacheLookup protected WebElement username;
     @FindBy(id="login-form-password")@CacheLookup protected WebElement password;
     @FindBy(xpath="//input[@value='Log In']")@CacheLookup protected WebElement logInButton;
@@ -31,7 +32,7 @@ public abstract class PageBase {
     }
 
     public void login(String username, String password) {
-        openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        openURL(baseURL +"/login.jsp");
         Util.wait(driver, 3).until(ExpectedConditions.visibilityOf(footerLogo));
         sendMessage(this.username, username);
         sendMessage(this.password, password);
@@ -49,6 +50,10 @@ public abstract class PageBase {
 
     public void close(){
         driver.close();
+    }
+
+    public String getBaseURL() {
+        return baseURL;
     }
 }
 

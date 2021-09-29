@@ -21,7 +21,7 @@ public class Logout extends PageBase{
     }
 
     public boolean validateLogout(String expected) {
-        openURL("https://jira-auto.codecool.metastage.net/browse/MTP");
+        openURL(getBaseURL() + "/browse/MTP");
         Util.wait(driver,TIME).until(ExpectedConditions.visibilityOf(warningMessage));
         return expected.equals(getText(warningMessage));
     }

@@ -21,12 +21,12 @@ public class ComponentsWithGlassTest extends MainTest {
         editComponentName = generateRandomString(6);
         components = new Components(driver);
 
-        components.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
+        components.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
 
-        components.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page");
+        components.openURL(components.getBaseURL() + "/projects/PP?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page");
         components.createComponent(componentName, "Unassigned");
         components.editComponent(editComponentName);
-        components.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        components.openURL(components.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertTrue(components.getGlassComponentNames().contains(editComponentName));
 
@@ -38,17 +38,17 @@ public class ComponentsWithGlassTest extends MainTest {
     public void componentsProjectDefaultAssigneeCase(String defaultAssignee, String expected1, String expected2) {
         components = new Components(driver);
 
-        components.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
+        components.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
 
-        components.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/roles");
+        components.openURL(components.getBaseURL() + "/plugins/servlet/project-config/PP/roles");
         components.editDefaults(defaultAssignee);
-        components.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        components.openURL(components.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertEquals(expected1, components.getDefaultAssigneeRole());
 
-        components.openURL("https://jira-auto.codecool.metastage.net/plugins/servlet/project-config/PP/roles");
+        components.openURL(components.getBaseURL() + "/plugins/servlet/project-config/PP/roles");
         components.editDefaults(expected2);
-        components.openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        components.openURL(components.getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
 
         assertEquals(expected2, components.getDefaultAssigneeRole());
     }

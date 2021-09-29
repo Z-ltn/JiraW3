@@ -1,7 +1,6 @@
 package com.codecool.jira.logout;
 
 import com.codecool.jira.MainTest;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page_object_model.logout.Logout;
@@ -18,7 +17,7 @@ public class LogoutTest extends MainTest {
         String expected = "If you think you shouldn't get this message, please contact your Jira administrators.";
 
         logout = new Logout(driver);
-        logout.login(dotenv.get(user), dotenv.get("PASSWORD"));
+        logout.login(System.getProperty(user), System.getProperty("PASSWORD"));
         logout.logout();
 
         assertTrue(logout.validateLogout(expected));

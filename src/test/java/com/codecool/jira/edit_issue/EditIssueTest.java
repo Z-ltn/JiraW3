@@ -16,7 +16,7 @@ public class EditIssueTest extends MainTest {
     public void editIssue(String user, String url) throws InterruptedException {
         dashboard = new Dashboard(driver);
 
-        dashboard.login(dotenv.get(user), dotenv.get("PASSWORD"));
+        dashboard.login(System.getProperty(user), System.getProperty("PASSWORD"));
 
         dashboard.openURL(url);
         if (!dashboard.canEditIssue()){

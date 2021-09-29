@@ -1,32 +1,33 @@
 package com.codecool.jira;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Util;
 
-import java.util.Objects;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class MainTest {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
-    protected static Dotenv dotenv;
-    //protected static Set<String> users = new HashSet<>(Arrays.asList("USER1", "USER2", "USER3", "USER4"));
+    String gridURL;
+    MutableCapabilities browserType;
 
     @BeforeEach
-    protected void setUp() {
-        if (Objects.equals(System.getProperty("os.name"), "Mac OS X")) {
-            System.setProperty("webdriver.chrome.driver", "/Users/popesz/Downloads/chromedriver");
-        }
-        driver = Util.getDriver();
-        dotenv = Dotenv.load();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    protected void setUp() throws MalformedURLException {
+        gridURL = "https://" + System.getProperty("griduser") + ":" + System.getProperty("gridPW") + "@seleniumhub.codecool.metastage.net/wd/hub";
+        browserType = System.getProperty("browser").equals("firefox") ? new FirefoxOptions() : new ChromeOptions();
+        driver = new RemoteWebDriver(new URL(gridURL), browserType);
+        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        wait = Util.wait(driver, 10);
+        wait = Util.wait(driver, 30);
     }
 
     @AfterEach

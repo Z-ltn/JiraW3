@@ -16,10 +16,10 @@ public class LoginTest extends MainTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_fromDashboard(String user) {
-        String expected = dotenv.get(user);
+        String expected = System.getProperty(user);
 
         login = new LogIn(driver);
-        login.login(dotenv.get(user), dotenv.get("PASSWORD"));
+        login.login(System.getProperty(user), System.getProperty("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
     }
@@ -29,7 +29,7 @@ public class LoginTest extends MainTest {
         String expected = "Sorry, your username and password are incorrect - please try again.";
 
         login = new LogIn(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        login.openURL(login.getBaseURL() + "/login.jsp");
         login.loginUsingEmptyCredentials();
 
         assertTrue(login.validateErrorMessage(expected));
@@ -41,8 +41,8 @@ public class LoginTest extends MainTest {
         String expected = "Sorry, your username and password are incorrect - please try again.";
 
         login = new LogIn(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
-        login.login(dotenv.get(user),"cica");
+        login.openURL(login.getBaseURL() + "/login.jsp");
+        login.login(System.getProperty(user),"cica");
 
         assertTrue(login.validateWrongPassword(expected));
     }
@@ -50,11 +50,11 @@ public class LoginTest extends MainTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1)
     public void login_successfulFromLoginPage(String user) {
-        String expected = dotenv.get(user);
+        String expected = System.getProperty(user);
 
         login = new LogIn(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
-        login.login(dotenv.get(user), dotenv.get("PASSWORD"));
+        login.openURL(login.getBaseURL() + "/login.jsp");
+        login.login(System.getProperty(user), System.getProperty("PASSWORD"));
 
         assertTrue(login.validateLogin(expected));
     }
@@ -66,7 +66,7 @@ public class LoginTest extends MainTest {
         String expected = "Sorry, your userid is required to answer a CAPTCHA question correctly.";
 
         login = new LogIn(driver);
-        login.openURL("https://jira-auto.codecool.metastage.net/login.jsp");
+        login.openURL(login.getBaseURL() + "/login.jsp");
         login.captcha(user);
 
         assertTrue(login.validateCaptcha(expected));

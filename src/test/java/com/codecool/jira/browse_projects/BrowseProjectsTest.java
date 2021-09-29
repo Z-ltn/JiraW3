@@ -22,7 +22,7 @@ public class BrowseProjectsTest extends MainTest {
     @CsvFileSource(resources = "/projects.csv", numLinesToSkip = 1)
     public void browseProject_generalCase(String title, String lead, String key) {
         summaryPage = new ProjectSummary(driver);
-        summaryPage.login(dotenv.get("USER1"), dotenv.get("PASSWORD"));
+        summaryPage.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
         summaryPage.openURL("https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
         wait.until(ExpectedConditions.visibilityOf(summaryPage.getTitle()));
 
@@ -35,8 +35,8 @@ public class BrowseProjectsTest extends MainTest {
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void searchForNonExistentProject(String summaryName) {
         search = new AllProjects(driver);
-        search.login(dotenv.get("USER2"), dotenv.get("PASSWORD"));
-        search.openURL("https://jira-auto.codecool.metastage.net/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all");
+        search.login(System.getProperty("USER2"), System.getProperty("PASSWORD"));
+        search.openURL(search.getBaseURL() + "/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all");
         search.searchForProject(summaryName);
         search.waitForNothing();
 
@@ -48,8 +48,8 @@ public class BrowseProjectsTest extends MainTest {
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void browseForNonExistentProject(String key) {
         non = new NonExistent(driver);
-        non.login(dotenv.get("USER2"), dotenv.get("PASSWORD"));
-        non.openURL("https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
+        non.login(System.getProperty("USER2"), System.getProperty("PASSWORD"));
+        non.openURL(non.getBaseURL() + "projects/" + key + "/summary");
 
         assertEquals("You can't view this project It may have been deleted or you don't have permission to view it.", non.getMessage());
     }

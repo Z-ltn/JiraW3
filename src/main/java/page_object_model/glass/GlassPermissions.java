@@ -33,7 +33,7 @@ public class GlassPermissions extends GlassDocumentation {
     }
 
     public void navigateToPermissions() {
-        openURL("https://jira-auto.codecool.metastage.net/projects/PP?selectedItem=com.codecanvas.glass:glass");
+        openURL(getBaseURL() + "/projects/PP?selectedItem=com.codecanvas.glass:glass");
         permissions.click();
     }
 }
