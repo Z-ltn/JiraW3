@@ -6,12 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import util.Util;
 
 import static keyword.Keyword.*;
 
 public abstract class PageBase { //TODO: caching seems unnecessary
+    protected int TimeoutValue = 30;
     protected WebDriver driver;
     protected JavascriptExecutor js;
     protected final String baseURL = System.getProperty("baseURL");
@@ -25,7 +27,7 @@ public abstract class PageBase { //TODO: caching seems unnecessary
     public PageBase(WebDriver driver) {
         this.driver = driver;
         this.js = (JavascriptExecutor) driver;
-        PageFactory.initElements(driver, this);}
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, TimeoutValue), this);}
 
     public void openURL(String url) {
         openPage(driver, url);
