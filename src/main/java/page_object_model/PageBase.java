@@ -13,7 +13,7 @@ import util.Util;
 import static keyword.Keyword.*;
 
 public abstract class PageBase { //TODO: caching seems unnecessary
-    protected int TimeoutValue = 30;
+    protected int TimeoutValue = Integer.parseInt(System.getProperty("timeout"));
     protected WebDriver driver;
     protected JavascriptExecutor js;
     protected final String baseURL = System.getProperty("baseURL");
