@@ -26,7 +26,7 @@ public class BrowseIssueTest extends MainTest {
 
     @Test
     public void  testBrowseIssue(){
-        issuePage.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        issuePage.login(System.getProperty("user1"), System.getProperty("password"));
         String expectedName = "DO_NOT_DELETE";
         String expectedType = "Story";
         String expectedTicketID = "MTP-767";
@@ -39,7 +39,7 @@ public class BrowseIssueTest extends MainTest {
 
     @Test
     public void browseIssue_nonExistentIssue() {
-        issuePage.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        issuePage.login(System.getProperty("user1"), System.getProperty("password"));
         String expected = "No issues were found to match your search\n" +
                 "Try modifying your search criteria or creating a new issue.";
 
@@ -52,7 +52,7 @@ public class BrowseIssueTest extends MainTest {
     @CsvFileSource(resources = "/browse_issue_data.csv", numLinesToSkip = 1)
     public void browseIssue(String userName, String expected, String projectUrl) {
 
-        issuePage.login(System.getProperty(userName), System.getProperty("PASSWORD"));
+        issuePage.login(System.getProperty(userName), System.getProperty("password"));
 
             issuePage.openURL(projectUrl);
             String actual = "";

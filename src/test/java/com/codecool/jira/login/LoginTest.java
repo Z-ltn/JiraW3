@@ -19,7 +19,7 @@ public class LoginTest extends MainTest {
         String expected = System.getProperty(user);
 
         login = new LogIn(driver);
-        login.login(System.getProperty(user), System.getProperty("PASSWORD"));
+        login.login(System.getProperty(user), System.getProperty("password"));
 
         assertTrue(login.validateLogin(expected));
     }
@@ -54,7 +54,7 @@ public class LoginTest extends MainTest {
 
         login = new LogIn(driver);
         login.openURL(login.getBaseURL() + "/login.jsp");
-        login.login(System.getProperty(user), System.getProperty("PASSWORD"));
+        login.login(System.getProperty(user), System.getProperty("password"));
 
         assertTrue(login.validateLogin(expected));
     }

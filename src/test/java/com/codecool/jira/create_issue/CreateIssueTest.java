@@ -18,7 +18,7 @@ public class CreateIssueTest extends MainTest {
     public void createIssue(String user, String projectName) {
         dashboard = new Dashboard(driver);
 
-        dashboard.login(System.getProperty(user), System.getProperty("PASSWORD"));
+        dashboard.login(System.getProperty(user), System.getProperty("password"));
 
         dashboard.createIssueOnlyProject(projectName);
         assertTrue(dashboard.getProjectPictureIsPresent());
@@ -29,7 +29,7 @@ public class CreateIssueTest extends MainTest {
     public void createIssueGeneralCase(String projectName, String issueType, String summaryName) {
         dashboard = new Dashboard(driver);
 
-        dashboard.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        dashboard.login(System.getProperty("user1"), System.getProperty("password"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
         assertEquals(summaryName, dashboard.getIssuePageSummaryName());
@@ -41,7 +41,7 @@ public class CreateIssueTest extends MainTest {
     public void deleteIssue(String projectName, String issueType, String summaryName, String expectedMessage) {
         dashboard = new Dashboard(driver);
 
-        dashboard.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        dashboard.login(System.getProperty("user1"), System.getProperty("password"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
         assertEquals(expectedMessage, dashboard.getDeletedIssueMessage());
@@ -52,7 +52,7 @@ public class CreateIssueTest extends MainTest {
     public void createSubTask(String projectName, String issueType, String summaryName) {
         dashboard = new Dashboard(driver);
 
-        dashboard.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        dashboard.login(System.getProperty("user1"), System.getProperty("password"));
 
         dashboard.createIssue(projectName, issueType, summaryName, false);
         dashboard.createSubTask();

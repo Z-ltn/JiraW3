@@ -14,7 +14,7 @@ public class IssueTypesInGlassTest extends MainTest {
     @Test
     public void issueTypesInGlass() {
         glassIssueTypes = new GlassIssueTypes(driver);
-        glassIssueTypes.login(System.getProperty("USER4"), System.getProperty("PASSWORD"));
+        glassIssueTypes.login(System.getProperty("user4"), System.getProperty("password"));
 
         List<String> types = glassIssueTypes.getTypes();
         List<String> actual = glassIssueTypes.getGlassTypes();

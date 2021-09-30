@@ -17,7 +17,7 @@ public class LogoutTest extends MainTest {
         String expected = "If you think you shouldn't get this message, please contact your Jira administrators.";
 
         logout = new Logout(driver);
-        logout.login(System.getProperty(user), System.getProperty("PASSWORD"));
+        logout.login(System.getProperty(user), System.getProperty("password"));
         logout.logout();
 
         assertTrue(logout.validateLogout(expected));

@@ -1,38 +1,38 @@
 user,projectname, project_url
-USER1,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
-USER1,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
-USER1,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
-USER1,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
-USER1,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
-USER1,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
-USER1,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
-USER1,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
-USER1,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
-USER2,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
-USER2,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
-USER2,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
-USER2,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
-USER2,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
-USER2,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
-USER2,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
-USER2,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
-USER2,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
-USER3,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
-USER3,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
-USER3,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
-USER3,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
-USER3,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
-USER3,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
-USER3,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
-USER3,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
-USER3,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
-USER4,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
-USER4,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
-USER4,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
-USER4,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
-USER4,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
-USER4,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
-USER4,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
-USER4,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
-USER4,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
+user1,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
+user1,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
+user1,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
+user1,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
+user1,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
+user1,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
+user1,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
+user1,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
+user1,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
+user2,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
+user2,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
+user2,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
+user2,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
+user2,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
+user2,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
+user2,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
+user2,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
+user2,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
+user3,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
+user3,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
+user3,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
+user3,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
+user3,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
+user3,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
+user3,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
+user3,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
+user3,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
+user4,COALA-1, https://jira-auto.codecool.metastage.net/browse/COALA-1
+user4,COALA-2,https://jira-auto.codecool.metastage.net/browse/COALA-2
+user4,COALA-3,https://jira-auto.codecool.metastage.net/browse/COALA-3
+user4,TOUCAN-1, https://jira-auto.codecool.metastage.net/browse/TOUCAN-1
+user4,TOUCAN-2, https://jira-auto.codecool.metastage.net/browse/TOUCAN-2
+user4,TOUCAN-3, https://jira-auto.codecool.metastage.net/browse/TOUCAN-3
+user4,JETI-1,https://jira-auto.codecool.metastage.net/browse/JETI-1
+user4,JETI-2,https://jira-auto.codecool.metastage.net/browse/JETI-2
+user4,JETI-3,https://jira-auto.codecool.metastage.net/browse/JETI-3
 

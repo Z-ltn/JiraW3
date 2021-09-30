@@ -22,7 +22,7 @@ public class BrowseProjectsTest extends MainTest {
     @CsvFileSource(resources = "/projects.csv", numLinesToSkip = 1)
     public void browseProject_generalCase(String title, String lead, String key) {
         summaryPage = new ProjectSummary(driver);
-        summaryPage.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        summaryPage.login(System.getProperty("user1"), System.getProperty("password"));
         summaryPage.openURL("https://jira-auto.codecool.metastage.net/projects/" + key + "/summary");
         wait.until(ExpectedConditions.visibilityOf(summaryPage.getTitle()));
 
@@ -35,7 +35,7 @@ public class BrowseProjectsTest extends MainTest {
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void searchForNonExistentProject(String summaryName) {
         search = new AllProjects(driver);
-        search.login(System.getProperty("USER2"), System.getProperty("PASSWORD"));
+        search.login(System.getProperty("user2"), System.getProperty("password"));
         search.openURL(search.getBaseURL() + "/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all");
         search.searchForProject(summaryName);
         search.waitForNothing();
@@ -48,7 +48,7 @@ public class BrowseProjectsTest extends MainTest {
     @CsvFileSource(resources = "/non_existent_projects.csv")
     public void browseForNonExistentProject(String key) {
         non = new NonExistent(driver);
-        non.login(System.getProperty("USER2"), System.getProperty("PASSWORD"));
+        non.login(System.getProperty("user2"), System.getProperty("password"));
         non.openURL(non.getBaseURL() + "projects/" + key + "/summary");
 
         assertEquals("You can't view this project It may have been deleted or you don't have permission to view it.", non.getMessage());

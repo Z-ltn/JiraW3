@@ -21,7 +21,7 @@ public class VersionTest extends MainTest {
     public void glass_addNewVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.login(System.getProperty("user3"),System.getProperty("password"));
         glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersionWithWrongReleaseDate(versionName);
 
@@ -41,7 +41,7 @@ public class VersionTest extends MainTest {
     public void glass_releaseVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.login(System.getProperty("user3"),System.getProperty("password"));
         glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
         glassVersion.releaseVersion(versionName);
@@ -60,7 +60,7 @@ public class VersionTest extends MainTest {
         versionName = generateRandomString(6);
         editVersionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.login(System.getProperty("user3"),System.getProperty("password"));
         glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
         glassVersion.editVersion(versionName, editVersionName);
@@ -78,7 +78,7 @@ public class VersionTest extends MainTest {
     public void glass_archiveVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.login(System.getProperty("user3"),System.getProperty("password"));
         glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
         glassVersion.archiveVersion(versionName);
@@ -96,7 +96,7 @@ public class VersionTest extends MainTest {
     public void version_connectIssueWithVersion() {
         versionName = generateRandomString(6);
         glassVersion = new GlassVersion(driver);
-        glassVersion.login(System.getProperty("USER3"),System.getProperty("PASSWORD"));
+        glassVersion.login(System.getProperty("user3"),System.getProperty("password"));
         glassVersion.openURL(glassVersion.getBaseURL() + "/plugins/servlet/project-config/PP/administer-versions");
         glassVersion.addNewVersion(versionName);
 

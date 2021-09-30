@@ -21,7 +21,7 @@ public class ComponentsWithGlassTest extends MainTest {
         editComponentName = generateRandomString(6);
         components = new Components(driver);
 
-        components.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        components.login(System.getProperty("user1"), System.getProperty("password"));
 
         components.openURL(components.getBaseURL() + "/projects/PP?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page");
         components.createComponent(componentName, "Unassigned");
@@ -38,7 +38,7 @@ public class ComponentsWithGlassTest extends MainTest {
     public void componentsProjectDefaultAssigneeCase(String defaultAssignee, String expected1, String expected2) {
         components = new Components(driver);
 
-        components.login(System.getProperty("USER1"), System.getProperty("PASSWORD"));
+        components.login(System.getProperty("user1"), System.getProperty("password"));
 
         components.openURL(components.getBaseURL() + "/plugins/servlet/project-config/PP/roles");
         components.editDefaults(defaultAssignee);

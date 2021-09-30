@@ -13,10 +13,10 @@ public class EditIssueTest extends MainTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/edit_issue.csv")
-    public void editIssue(String user, String url) throws InterruptedException {
+    public void editIssue(String user, String url) {
         dashboard = new Dashboard(driver);
 
-        dashboard.login(System.getProperty(user), System.getProperty("PASSWORD"));
+        dashboard.login(System.getProperty(user), System.getProperty("password"));
 
         dashboard.openURL(url);
         if (!dashboard.canEditIssue()){

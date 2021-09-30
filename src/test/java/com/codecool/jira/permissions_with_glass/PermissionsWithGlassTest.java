@@ -18,7 +18,7 @@ public class PermissionsWithGlassTest extends MainTest {
     public void browseProjectPermission_shouldBeTheSameInGlass(PermissionRoles role) {
         glassPermissions = new GlassPermissions(driver);
         projectPermissions = new ProjectSettingsPermissions(driver);
-        projectPermissions.login(System.getProperty("USER2"), System.getProperty("PASSWORD"));
+        projectPermissions.login(System.getProperty("user2"), System.getProperty("password"));
         String expected = projectPermissions.getProjectPermission(role.getElement(driver));
 
         glassPermissions.navigateToPermissions();
