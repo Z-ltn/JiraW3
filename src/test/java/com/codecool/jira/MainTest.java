@@ -22,7 +22,7 @@ public class MainTest {
 
     @BeforeEach
     protected void setUp() throws MalformedURLException {
-        gridURL = "https://" + System.getProperty("griduser") + ":" + System.getProperty("gridPW") + "@seleniumhub.codecool.metastage.net/wd/hub";
+        gridURL = "https://" + System.getProperty("gridUser") + ":" + System.getProperty("PASSWORD") + "@seleniumhub.codecool.metastage.net/wd/hub";
         browserType = System.getProperty("browser").equals("firefox") ? new FirefoxOptions() : new ChromeOptions();
         driver = new RemoteWebDriver(new URL(gridURL), browserType);
         //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
