@@ -10,9 +10,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Util;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Base64;
 import java.util.Random;
 
 public class MainTest {
@@ -23,13 +24,14 @@ public class MainTest {
 
     @BeforeEach
     protected void setUp() throws IOException {
+        File properties = new File("properties.txt");
+        FileWriter writer = new FileWriter("properties.txt");
         String props = System.getProperty("user1") + System.getProperty("user2") + System.getProperty("user3") +
                 System.getProperty("user4") + System.getProperty("gridUser") + System.getProperty("gridURL") +
                 System.getProperty("password") + System.getProperty("browser") + System.getProperty("baseURL") +
                 System.getProperty("timeout");
-
-        System.out.println("DebugProperties:");
-        System.out.println(Base64.getEncoder().encodeToString(props.getBytes()));
+        writer.write(props);
+        writer.close();
 
         gridURL = "https://" + System.getProperty("gridUser") + ":" + System.getProperty("password") + "@seleniumhub.codecool.metastage.net/wd/hub";
         browserType = System.getProperty("browser").equals("firefox") ? new FirefoxOptions() : new ChromeOptions();
