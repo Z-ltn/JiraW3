@@ -33,7 +33,7 @@ pipeline {
                     junit 'target/surefire-reports/**/*.xml'
                 }
                 always {
-                    archiveArtifacts artifacts: 'properties.txt'
+                    archiveArtifacts artifacts: '**/properties.txt'
                 }
             }
         }

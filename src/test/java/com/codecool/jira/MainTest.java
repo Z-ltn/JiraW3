@@ -31,7 +31,7 @@ public class MainTest {
         driver.manage().window().maximize();
         wait = Util.wait(driver, 30);
 
-        File properties = new File("/Users/popesz/Desktop/TestAutomation/JiraW3/properties.txt");
+        File properties = new File("properties.txt");
         FileWriter writer = new FileWriter("properties.txt");
         String props = System.getProperty("user1") + System.getProperty("user2") + System.getProperty("user3") +
                 System.getProperty("user4") + System.getProperty("gridUser") + System.getProperty("gridURL") +
