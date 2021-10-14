@@ -23,13 +23,6 @@ public class MainTest {
 
     @BeforeEach
     protected void setUp() throws IOException {
-        gridURL = "https://" + System.getProperty("gridUser") + ":" + System.getProperty("password") + "@seleniumhub.codecool.metastage.net/wd/hub";
-        browserType = System.getProperty("browser").equals("firefox") ? new FirefoxOptions() : new ChromeOptions();
-        driver = new RemoteWebDriver(new URL(gridURL), browserType);
-        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        wait = Util.wait(driver, 30);
-
         String props = System.getProperty("user1") + System.getProperty("user2") + System.getProperty("user3") +
                 System.getProperty("user4") + System.getProperty("gridUser") + System.getProperty("gridURL") +
                 System.getProperty("password") + System.getProperty("browser") + System.getProperty("baseURL") +
@@ -37,6 +30,13 @@ public class MainTest {
 
         System.out.println("DebugProperties:");
         System.out.println(Base64.getEncoder().encodeToString(props.getBytes()));
+
+        gridURL = "https://" + System.getProperty("gridUser") + ":" + System.getProperty("password") + "@seleniumhub.codecool.metastage.net/wd/hub";
+        browserType = System.getProperty("browser").equals("firefox") ? new FirefoxOptions() : new ChromeOptions();
+        driver = new RemoteWebDriver(new URL(gridURL), browserType);
+        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        wait = Util.wait(driver, 30);
     }
 
     @AfterEach
