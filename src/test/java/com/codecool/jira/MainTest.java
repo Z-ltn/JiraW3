@@ -26,9 +26,9 @@ public class MainTest {
     protected void setUp() throws IOException {
         File properties = new File("properties.txt");
         FileWriter writer = new FileWriter("properties.txt");
-        String props = System.getProperty("user1") + System.getProperty("user2") + System.getProperty("user3") +
-                System.getProperty("user4") + System.getProperty("gridUser") + System.getProperty("gridURL") +
-                System.getProperty("password") + System.getProperty("browser") + System.getProperty("baseURL") +
+        String props = System.getProperty("user1") + "\n" + System.getProperty("user2") + "\n" + System.getProperty("user3") + "\n" +
+                System.getProperty("user4") + "\n" + System.getProperty("gridUser") + "\n" +
+                System.getProperty("password") + "\n" + System.getProperty("browser") + "\n" + System.getProperty("baseURL") + "\n" +
                 System.getProperty("timeout");
         writer.write(props);
         writer.close();
