@@ -10,7 +10,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Util;
 
-import java.net.MalformedURLException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 
@@ -21,13 +23,22 @@ public class MainTest {
     MutableCapabilities browserType;
 
     @BeforeEach
-    protected void setUp() throws MalformedURLException {
+    protected void setUp() throws IOException {
         gridURL = "https://" + System.getProperty("gridUser") + ":" + System.getProperty("password") + "@seleniumhub.codecool.metastage.net/wd/hub";
         browserType = System.getProperty("browser").equals("firefox") ? new FirefoxOptions() : new ChromeOptions();
         driver = new RemoteWebDriver(new URL(gridURL), browserType);
         //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         wait = Util.wait(driver, 30);
+
+        File properties = new File("/Users/popesz/Desktop/TestAutomation/JiraW3/properties.txt");
+        FileWriter writer = new FileWriter("properties.txt");
+        String props = System.getProperty("user1") + System.getProperty("user2") + System.getProperty("user3") +
+                System.getProperty("user4") + System.getProperty("gridUser") + System.getProperty("gridURL") +
+                System.getProperty("password") + System.getProperty("browser") + System.getProperty("baseURL") +
+                System.getProperty("timeout");
+        writer.write(props);
+        writer.close();
     }
 
     @AfterEach
