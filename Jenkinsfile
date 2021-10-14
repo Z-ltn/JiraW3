@@ -32,9 +32,6 @@ pipeline {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
                 }
-                always {
-                    archiveArtifacts artifacts: '**/properties.txt'
-                }
             }
         }
         stage('Clean') {
